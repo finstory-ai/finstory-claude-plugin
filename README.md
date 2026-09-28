@@ -1,6 +1,6 @@
 # finstory plugin for Claude
 
-The official finstory plugin, published by Finstory, Inc. It connects Claude to your company's finstory workspace so you can ask questions about your actuals, budget and forecast, build and edit finstory reports, and draft board stories page by page, all from a Claude conversation.
+The finstory plugin for Claude, from Finstory, Inc. It connects Claude to your company's finstory workspace so you can ask questions about your actuals, budget and forecast, build and edit finstory reports, and draft board stories page by page, all from a Claude conversation.
 
 The plugin bundles two things:
 

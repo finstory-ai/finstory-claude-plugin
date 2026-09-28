@@ -4,7 +4,7 @@
     "name": "Finstory, Inc.",
     "url": "https://finstory.ai"
   },
-  "description": "The official finstory plugin for Claude, published by Finstory, Inc.",
+  "description": "The finstory plugin for Claude, from Finstory, Inc.",
   "plugins": [
     {
       "name": "finstory",
