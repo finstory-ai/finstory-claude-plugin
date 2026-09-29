@@ -11,6 +11,7 @@ The `tool_notes` returned by the finstory connector's `company_get_context` tool
 ## Warnings and empty results
 
 - Read `warnings` before any conclusion that rests on an affected figure.
+- `PLAN_MISSING` names a row whose comparison (budget, forecast or the earlier year, as labelled) is absent, zero or under 1% of the actual. Its variance is in effect the actual itself, not an overrun or a shortfall: call the line unbudgeted (or absent from the comparison), give the actual on its own, and label it that way wherever it appears in a ranking or a bridge rather than presenting it as a driver.
 - Warnings cover only the cells this query returned. An empty list means nothing was flagged in what you asked for, not that the data is clean.
 - If a query returns no values, re-run that one query with `verbose: true` and read the generated query before telling the user the data is absent. Leave `verbose` off otherwise; it makes the result several times larger.
 

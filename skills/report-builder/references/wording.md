@@ -29,7 +29,7 @@ The tools use report-definition vocabulary that means little to a finance user. 
 
 Say what the reader will see, in the order they'll see it:
 
-> Here's the layout I'd build: the scope at the top (entity, year, month). A full-width table with revenue, gross margin and EBITDA down the side and this year's months across, actual against budget. Under it, a bar chart of the monthly EBITDA gap to budget. Shall I build it?
+> Here's the layout I'd build: the scope at the top (entity, year, month). A full-width table with this year's months down the side and, across the top, revenue, gross margin and EBITDA, each as actual, budget and variance. Under it, a bar chart of the monthly EBITDA gap to budget. Shall I build it?
 
 ## Describing a change
 

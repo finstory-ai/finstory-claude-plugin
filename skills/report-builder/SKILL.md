@@ -36,11 +36,11 @@ Design guidance is in [references/design-principles.md](references/design-princi
 
 ## Preview, then publish
 
-Show the user the finished preview and the key figures, and ask whether to publish. When they agree, run `report_get_outline` with `validate: "final"`, fix every issue it lists, then call the finstory connector's `report_finalize` tool. Tell the user where the report now sits in the menu. If they want changes first, make them and preview again.
+Show the user the finished preview and the key figures, and ask whether to publish. When they agree, run `report_get_outline` with `validate: "final"`, fix every issue it lists, then call the finstory connector's `report_finalize` tool. Tell the user where the report now sits in the menu and give them its link. The menu group is the `group_name` that `report_create` returned (or `to_group` from a later `report_move`; for an existing report, `menu_group` from `report_list`), and the link is the `report_url` that `report_finalize` returns. Don't guess either one. If they want changes first, make them and preview again.
 
 ## Accuracy
 
-- Quote figures from previews exactly as returned; don't recompute or rescale them.
+- `report_preview_values` returns raw numbers (full precision, no currency or scale applied). When you quote one, show it in the report's number format (the currency, scale and decimals agreed for this report, as the rendered preview shows them), never as the raw float. Otherwise take figures from the previews as they are: don't recompute them, change their sign or combine them.
 - When a tool returns an error that names a parameter, fix that parameter and retry once rather than trying other payload shapes.
 - If a check shows a figure that looks wrong (a subtotal with the wrong sign, an empty row), fix the report definition or tell the user; unless they ask for a reconciliation, flag a data inconsistency in one line and carry on.
 

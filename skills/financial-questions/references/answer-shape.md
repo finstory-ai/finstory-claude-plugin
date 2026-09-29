@@ -29,23 +29,23 @@ The last thing in the reply is the line "Where next?" followed by two to four le
 
 The user answers with a letter or in their own words; run that cut. Plain lettered lines work in every host. If the host offers a choice widget, the same lettered options can go there instead. Close on the options rather than an open "let me know what else you need".
 
-## Worked example (synthetic figures)
+## Worked example (synthetic figures, printed the way a result's `formatting` gives them: full units, two decimals)
 
 Question: "How did June go against budget on operating income?"
 
-> Operating income was 0.42m below budget in June (1.18m against 1.60m), with marketing and freight explaining most of the gap.
+> Operating income was 420,000.00 below budget in June (1,180,000.00 against 1,600,000.00), with marketing and freight explaining most of the gap.
 >
 > *[One visual: a diverging bar of the six largest variances in profit impact, marketing and freight at the left, a small favourable revenue bar at the right.]*
 >
-> Marketing ran 0.25m over budget, almost all in paid campaigns. May was on budget at 0.31m, so this looks like a one-off launch spend rather than a new run-rate; the account detail would confirm it.
+> Marketing ran 250,000.00 over budget, almost all in paid campaigns. May was on budget at 310,000.00, so this looks like a one-off launch spend rather than a new run-rate; the account detail would confirm it.
 >
-> Freight was 0.14m over budget as volumes rose 6% while the rate per shipment held. That makes it volume-driven, and it moves with the revenue beat rather than against it.
+> Freight was 140,000.00 over budget as volumes rose 6% while the rate per shipment held. That makes it volume-driven, and it moves with the revenue beat rather than against it.
 >
-> Revenue was 0.05m ahead, not enough to offset either cost line. Which regions carried it: cause not visible at this level.
+> Revenue was 50,000.00 ahead, not enough to offset either cost line. Which regions carried it: cause not visible at this level.
 >
 > Caveat: the result flagged one entity's June actuals as provisional.
 >
 > Where next?
 > A) Marketing for June, drilled to individual accounts, to confirm the one-off campaign charge.
 > B) Freight by region against budget, year to date, to see whether the overrun is one region or all.
-> C) Revenue by region for June against budget, to find where the 0.05m beat came from.
+> C) Revenue by region for June against budget, to find where the 50,000.00 beat came from.

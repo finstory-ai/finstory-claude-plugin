@@ -23,7 +23,7 @@ One page at a time, in the order agreed with the user:
 5. **Add the page content**: tags, text blocks and notes pinned to table cells or chart points, in one `story_add_page_content` call. Nothing is saved if any item is refused, so fix the item it names and send the call again.
 6. **Confirm before the next page.** Tell the user the page is saved, in a line or two, and ask whether to go on to the next one.
 
-If a question genuinely needs a number the summary left out, `story_get_display_pack_detail` returns every row and chart point of the page already shown.
+If a question genuinely needs a number the summary left out, `story_get_display_pack_detail` returns more rows and chart points of the tables and charts in the summary; each table's note says what it leaves out.
 
 ## Asking the page's questions
 
@@ -51,7 +51,8 @@ Placement follows the pack's Layout line; there's no need to ask the user about 
 ## Notices in the pack
 
 - **A cut the report doesn't allow:** if the pack says the page asks for a scope the report ignores, clear it with `story_update_page` rather than writing about a slice the page isn't showing.
-- **Components that couldn't be read:** if the pack says some components are missing from the summary and the image, don't describe the page as complete; tell the user what's missing.
+- **Components that couldn't be read:** if the pack says some components could not be read, their figures are missing from the summary, so don't describe the page as complete; tell the user which part is missing.
+- **Beyond the summary's limit:** if the pack lists tables, charts or headline figures beyond its limit, they are in the image but their figures are not in the summary or in `story_get_display_pack_detail`; quote no figures from them unless the user gives them.
 - **A chart that failed to render:** if the pack says a chart didn't render in the image, tell the user that chart is missing from the image and don't describe what it would show. The figures in the summary are still exact.
 - **No image:** if the image couldn't be rendered, say so; the summary figures are still exact and the page can still be written.
 
@@ -69,7 +70,9 @@ Placement follows the pack's Layout line; there's no need to ask the user about 
 
 For "move last month's story to the latest closed month":
 
-1. Open the story with `story_get` and confirm the new period with the user (from the year and period members in the context).
+1. Open the story with `story_get` and confirm the new period with the user (from the year and period members in the context; for "the latest closed month", propose the latest month with actuals, found as in the skill's Start step 3).
 2. Move the whole story with `story_update`, passing every scope setting to keep, including year and period. Pages with their own scope keep it.
-3. Go through the pages one at a time: re-show each with `story_get_display_pack` and its `pageId`, compare the new figures with the existing headline and commentary, and propose an update only where the story has changed. Confirm each change with the user before saving it with `story_update_page`.
-4. Finish on the story link.
+3. Go through the pages one at a time: re-show each with `story_get_display_pack` and its `pageId`, compare the new figures with the existing headline and commentary, and propose an update only where the story has changed or the wording names the old period. Confirm each change with the user before saving it with `story_update_page`.
+4. On the same page, check its tags, text blocks and notes (`story_get` lists them per page) for wording about the old period or figures that have since moved. With the user's agreement, replace a stale tag by removing it with `story_remove_chip` (highest `chipIndex` first, so the others keep their positions) and adding the new one with `story_add_page_content`. Text blocks and notes can only be added from here, not changed or removed, so list the stale ones with a suggested rewording for the user to edit in finstory rather than adding a second one beside them.
+5. If the pack's POV line doesn't show the new period, that page's report fixes its own period and doesn't move with the story; its figures change only where new data was loaded. Tell the user, and word its headline and commentary for the period it actually shows.
+6. Finish on the story link if `story_get` returned a `story_url`; otherwise name the story and the pages that changed. Don't build a link from its id.
