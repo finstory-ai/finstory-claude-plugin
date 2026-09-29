@@ -23,7 +23,7 @@ One page at a time, in the order agreed with the user:
 5. **Add the page content**: tags, text blocks and notes pinned to table cells or chart points, in one `story_add_page_content` call. Nothing is saved if any item is refused, so fix the item it names and send the call again.
 6. **Confirm before the next page.** Tell the user the page is saved, in a line or two, and ask whether to go on to the next one.
 
-If a question genuinely needs a number the summary left out, `story_get_display_pack_detail` returns more rows and chart points of the tables and charts in the summary; each table's note says what it leaves out.
+If a question genuinely needs a number the summary left out, `story_get_display_pack_detail` returns more rows and chart points of the tables and charts in the summary. Each table's note says which rows it keeps. A table wider than eight columns is also cut to eight, and its note may not say so, so a month or column missing from it is not proof the report lacks it: ask the user for the figure rather than saying it isn't there.
 
 ## Asking the page's questions
 
