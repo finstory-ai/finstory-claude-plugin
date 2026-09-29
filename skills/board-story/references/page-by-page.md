@@ -70,7 +70,7 @@ Placement follows the pack's Layout line; there's no need to ask the user about 
 
 For "move last month's story to the latest closed month":
 
-1. Open the story with `story_get` and confirm the new period with the user (from the year and period members in the context; for "the latest closed month", propose the latest month with actuals, found as in the skill's Start step 3).
+1. Open the story with `story_get` and confirm the new period with the user (from the year and period members in the context; for "the latest closed month", propose it as in the skill's Start step 3: the latest month with actuals, never the current calendar month).
 2. Move the whole story with `story_update`, passing every scope setting to keep, including year and period. Pages with their own scope keep it.
 3. Go through the pages one at a time: re-show each with `story_get_display_pack` and its `pageId`, compare the new figures with the existing headline and commentary, and propose an update only where the story has changed or the wording names the old period. Confirm each change with the user before saving it with `story_update_page`.
 4. On the same page, check its tags, text blocks and notes (`story_get` lists them per page) for wording about the old period or figures that have since moved. With the user's agreement, replace a stale tag by removing it with `story_remove_chip` (highest `chipIndex` first, so the others keep their positions) and adding the new one with `story_add_page_content`. Text blocks and notes can only be added from here, not changed or removed, so list the stale ones with a suggested rewording for the user to edit in finstory rather than adding a second one beside them.
