@@ -2,6 +2,15 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.2 (2026-09-29)
+
+Review fixes to 1.0.1.
+
+- `financial-questions` and `board-story`: "last month" and "last closed month" never pick the current calendar month, which may still be loading, so a part-month is not set against a full-month budget. Only "this month" reads the current month, and the answer says it is not closed. The board-story lookup passes `model` on a workspace with several models.
+- `financial-questions`: a `PLAN_MISSING` line stays in rankings, bridges and the reading, labelled unbudgeted, because it still moves the total; before calling it an overrun, Claude checks whether its budget sits on another line. A currency is printed only when the query's scope sets one.
+- `board-story`: a month or column missing from a display pack table may have been cut to fit, so Claude asks for it rather than saying the report lacks it. When a rolled-forward page keeps the old period, Claude checks the page's own scope and a `"@default"` story period before saying the report fixes its period.
+- `report-builder`: the metrics-by-month principle points to `report_build_list` and `report_describe_schema` for rolling lists.
+
 ## 1.0.1 (2026-09-29)
 
 Fixes from the first live test of the skills.
