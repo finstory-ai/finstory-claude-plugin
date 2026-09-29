@@ -5,7 +5,8 @@ The `tool_notes` returned by the finstory connector's `company_get_context` tool
 ## Figures and formatting
 
 - An `analysis_query` result carries `table`, `rowCount`, `formatting` and `warnings`.
-- Format every figure the way `formatting` says: scale, decimals, currency and the variance sign convention. Don't print raw floats, and show percentages as percentages.
+- Format every figure the way `formatting` says: scale, decimals and the variance sign convention. Don't print raw floats, and show percentages as percentages.
+- Name a currency only when the query's scope sets one, through `pov` or the context's default scope. Without one, `formatting.currency` holds a fixed default, not the workspace's currency, so leave the currency out.
 - An empty variance-% cell is deliberate: the comparison is absent, zero or tiny next to the figure, or the two sit on opposite sides of zero. Quote the absolute variance and leave the percentage out rather than working it out yourself.
 
 ## Warnings and empty results

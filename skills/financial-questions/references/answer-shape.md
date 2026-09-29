@@ -29,7 +29,9 @@ The last thing in the reply is the line "Where next?" followed by two to four le
 
 The user answers with a letter or in their own words; run that cut. Plain lettered lines work in every host. If the host offers a choice widget, the same lettered options can go there instead. Close on the options rather than an open "let me know what else you need".
 
-## Worked example (synthetic figures, printed the way a result's `formatting` gives them: full units, two decimals)
+## Worked example
+
+Synthetic figures, in full units with two decimals as an ad-hoc result's `formatting` gives them. No currency is printed because the question's scope sets none (see [reading-results.md](reading-results.md)).
 
 Question: "How did June go against budget on operating income?"
 
