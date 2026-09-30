@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Please report security issues privately to **security@finstory.ai**, or through the form at https://finstory.ai/security#report. Do not open a public GitHub issue for a security problem.
+Please report security issues privately to **security@finstory.ai**, or as described at https://finstory.ai/security#report. Do not open a public GitHub issue for a security problem.
 
 Include what you found, the steps to reproduce it, and the version of the plugin (from `.claude-plugin/plugin.json`). We acknowledge reports and keep you informed while we investigate and fix them.
 

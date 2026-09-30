@@ -2,6 +2,13 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.3 (2026-09-30)
+
+- `board-story`: works when a story page comes back without the report image, as it does on a host without MCP Apps such as Claude Code. The page notes decide: when the user is shown the rendered report, Claude writes around it as before; when no image came with the result, Claude says the report image isn't shown in this app, shows the page's headline figures and the rows its questions cite as one small table, and writes from those figures without describing a picture. The pack's "No image" notice now separates an image never rendered for the connection from one that was too large or failed to render.
+- `financial-questions` and `report-builder`: an account of type Balance (a level such as headcount) shows its level in every view, so a quarter or year shows its latest month; a level held in another account type is still read at year to date. Levels are never added up over periods.
+- README: the privacy link points at the "finstory in Claude" section of the privacy policy, the install section says the repository is public and is its own marketplace, and the `board-story` row says what happens without the report image.
+- SECURITY.md: points to the reporting instructions on the security page rather than to a form, since the page has none.
+
 ## 1.0.2 (2026-09-29)
 
 Review fixes to 1.0.1.
@@ -10,6 +17,7 @@ Review fixes to 1.0.1.
 - `financial-questions`: a `PLAN_MISSING` line stays in rankings, bridges and the reading, labelled unbudgeted, because it still moves the total; before calling it an overrun, Claude checks whether its budget sits on another line. A currency is printed only when the query's scope sets one.
 - `board-story`: a month or column missing from a display pack table may have been cut to fit, so Claude asks for it rather than saying the report lacks it. When a rolled-forward page keeps the old period, Claude checks the page's own scope and a `"@default"` story period before saying the report fixes its period.
 - `report-builder`: the metrics-by-month principle points to `report_build_list` and `report_describe_schema` for rolling lists.
+- `financial-questions` (8b193ea, added after the version bump under the same number): the account-model favourability fallback applies only when a long list of accounts spans more than one group; a wide query within one group keeps the result's own favourability statement.
 
 ## 1.0.1 (2026-09-29)
 

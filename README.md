@@ -18,6 +18,8 @@ It works in Claude on the web and desktop (chat and Cowork) and in Claude Code.
 
 ## Install
 
+This repository is public and is also a plugin marketplace named `finstory`, so you add it by its GitHub name, `finstory-ai/finstory-claude-plugin`.
+
 ### Claude on the web and desktop (chat and Cowork)
 
 1. Go to **Customize > Plugins > Add**.
@@ -43,7 +45,7 @@ After installing, open the plugin's **Connectors** tab, connect **finstory**, an
 | --- | --- |
 | `financial-questions` | Answers questions about your numbers: variances against budget or prior year, cost lines, margins, trends and KPIs. Replies with a headline, one visual, a short reading of the drivers, and lettered options for the next cut. |
 | `report-builder` | Designs a finstory report with you, builds it as a hidden draft, previews the figures, and publishes it only when you agree. Also edits existing reports. |
-| `board-story` | Builds a board story one page at a time: agrees the pages and their order, shows each report page, asks what drove the key numbers, writes the headline and commentary, and saves the page. Also rolls a story forward to a new period and exports it for PowerPoint, PDF or other formats. |
+| `board-story` | Builds a board story one page at a time: agrees the pages and their order, shows each report page, asks what drove the key numbers, writes the headline and commentary, and saves the page. Where the report image can't be shown, as in Claude Code, it shows the page's key figures as a small table instead. Also rolls a story forward to a new period and exports it for PowerPoint, PDF or other formats. |
 
 Claude picks the right skill from your request. You can also name it, for example "use the finstory board-story skill".
 
@@ -61,7 +63,7 @@ Claude picks the right skill from your request. You can also name it, for exampl
 - **The bundled connector** sends tool calls only to `https://mcp.finstory.ai`, on your behalf, after you sign in with your finstory login. Every call runs within your finstory role: it reads only what your role can read, and it creates or changes reports and stories only where your role allows.
 - **What the connector can change:** it creates and edits reports and stories in your finstory workspace. New reports stay hidden until they are published. It has no tool that deletes a whole report or story; it can remove single items (a story page, a tag, a report component or list item), and the skills tell Claude to do that only when you ask.
 - **Approvals:** every connector tool is marked as read-only, additive, or able to overwrite, so Claude can ask for your approval before a change runs, depending on your Claude settings.
-- **Privacy policy:** https://finstory.ai/privacy#claude
+- **Privacy policy:** https://finstory.ai/privacy#finstory-in-claude
 - **Documentation:** https://finstory.ai/docs/claude
 
 ## Support and security
