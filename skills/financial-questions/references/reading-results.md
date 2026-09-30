@@ -31,4 +31,4 @@ Some breakdown dimensions carry data only for one branch of the accounts (their 
 ## Models and levels
 
 - With two or more models, pass `model` on every call. One query reads one model.
-- A level such as headcount is read at year to date: the periodic view of a level shows the change, not the level. Never add a level up over periods.
+- An account of `accountType` Balance holds a level such as headcount and shows the level in every view, Periodic included: a quarter or year shows its latest loaded month. A level held in another account type reads at year to date, and its periodic view shows the change, not the level. Never add a level up over periods.
