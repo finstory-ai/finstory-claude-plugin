@@ -16,8 +16,10 @@ Contents
 
 One page at a time, in the order agreed with the user:
 
-1. **Show the page.** Call the finstory connector's `story_get_display_pack` tool with the story's `documentId`, the page's `report_id` from `report_list`, the topic, and a `pov` if the page shows one part of the business. The user sees the real report as an image; you receive a summary of its figures (headline cards, the largest bridge movements, the top and bottom table rows) exactly as the report shows them.
-2. **Read the page.** A few sentences of prose: what stands out and what it implies, read through the topic's lens ([topic-lenses.md](topic-lenses.md)). Refer to figures by name and value. Write around the report the user is already looking at rather than redrawing its tables, cards or charts.
+1. **Show the page.** Call the finstory connector's `story_get_display_pack` tool with the story's `documentId`, the page's `report_id` from `report_list`, the topic, and a `pov` if the page shows one part of the business. You receive a summary of its figures (headline cards, the largest bridge movements, the top and bottom table rows) exactly as the report shows them. On a host that supports MCP Apps the user also sees the real report as an image; the page notes say whether an image came with this result.
+2. **Read the page.** A few sentences of prose: what stands out and what it implies, read through the topic's lens ([topic-lenses.md](topic-lenses.md)). Refer to figures by name and value.
+   - If the user is shown the image, write around the report they are looking at rather than redrawing its tables, cards or charts.
+   - If no image came with the result, the user hasn't seen the page. Say in one line that the report image isn't shown in this app, then show the headline figures and the rows your questions will cite as one small table, quoted exactly and labelled as the page's summary, and write the read from those figures. Don't describe a picture or say the page is on screen.
 3. **Ask the page's questions** (next section). Your reply ends with them.
 4. **Save the page** once the user has answered: `story_add_page` with the headline, commentary and storyline fields, and the same `pov` you passed to the pack. It returns a `pageId`.
 5. **Add the page content**: tags, text blocks and notes pinned to table cells or chart points, in one `story_add_page_content` call. Nothing is saved if any item is refused, so fix the item it names and send the call again.
@@ -52,9 +54,11 @@ Placement follows the pack's Layout line; there's no need to ask the user about 
 
 - **A cut the report doesn't allow:** if the pack says the page asks for a scope the report ignores, clear it with `story_update_page` rather than writing about a slice the page isn't showing.
 - **Components that couldn't be read:** if the pack says some components could not be read, their figures are missing from the summary, so don't describe the page as complete; tell the user which part is missing.
-- **Beyond the summary's limit:** if the pack lists tables, charts or headline figures beyond its limit, they are in the image but their figures are not in the summary or in `story_get_display_pack_detail`; quote no figures from them unless the user gives them.
+- **Beyond the summary's limit:** if the pack lists tables, charts or headline figures beyond its limit, they are on the report page (and in its image, where one is shown) but their figures are not in the summary or in `story_get_display_pack_detail`; quote no figures from them unless the user gives them.
 - **A chart that failed to render:** if the pack says a chart didn't render in the image, tell the user that chart is missing from the image and don't describe what it would show. The figures in the summary are still exact.
-- **No image:** if the image couldn't be rendered, say so; the summary figures are still exact and the page can still be written.
+- **No image:** the page notes say no report image comes with the result. The summary figures are exact either way, and the page can still be written.
+  - *No further notice, or a notice that no image was rendered for this connection* (the host doesn't support MCP Apps, as in Claude Code): the user sees nothing of the page unless you show it. Tell them the report image isn't shown in this app and show the figures as in loop step 2. Where the host shows the finstory story-page app anyway, the app loads the image itself and tells you whether it is showing the image or the page's figures as tables; write around what it shows.
+  - *A notice that the image was too large to send or could not be rendered:* say in one line that the report image is missing, and don't describe a picture. If the notice says the story-page app shows the page's figures as tables instead, write around those; otherwise show the figures as in loop step 2.
 
 ## Editing a saved story
 

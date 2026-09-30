@@ -26,16 +26,21 @@ This skill needs the finstory connector, which comes with this plugin. If the fi
 
 For each page, in the agreed order:
 
-1. The finstory connector's `story_get_display_pack` tool shows the user the report page and returns a summary of its figures. Pick the topic that fits the page (P&L, Cash, Capital, Working Capital, KPI or Other); the lens for each is in [references/topic-lenses.md](references/topic-lenses.md).
-2. Write a short read of the page and ask its two to four questions, each naming a number from the summary and asking what caused it.
+1. The finstory connector's `story_get_display_pack` tool returns a summary of the report page's figures and, on a host that supports MCP Apps, shows the user the page itself as an image; its page notes say whether an image came with the result. Pick the topic that fits the page (P&L, Cash, Capital, Working Capital, KPI or Other); the lens for each is in [references/topic-lenses.md](references/topic-lenses.md).
+2. Write a short read of the page and ask its two to four questions, each naming a number from the summary and asking what caused it. When no image came with the result, show the figures first (next section).
 3. When the user has answered, save the page with the finstory connector's `story_add_page` tool (headline, commentary, storyline fields), then add tags, text and notes with the finstory connector's `story_add_page_content` tool.
 4. Show the user what was saved and confirm before starting the next page.
 
 Don't fetch packs for later pages ahead of time or batch several pages together. Build the whole deck without stopping only when the user explicitly asks for that; a short request is not that request. The full loop is in [references/page-by-page.md](references/page-by-page.md).
 
-## The page is already on screen
+## Whether the user sees the page
 
-`story_get_display_pack` shows the user the real report as an image. Write the narrative around it rather than redrawing its tables, cards or charts in your reply, and refer to figures by name and value ("gross margin at 42.1%, down 3.4 points"). Quote figures exactly as the pack gives them; don't recompute, rescale or combine them.
+The page notes in each `story_get_display_pack` result say whether the report image came with it.
+
+- **The user is shown the rendered report:** the page is on screen. Write the narrative around it rather than redrawing its tables, cards or charts in your reply, and refer to figures by name and value ("gross margin at 42.1%, down 3.4 points").
+- **No report image came with the result** (the host doesn't support MCP Apps, as in Claude Code): the user hasn't seen the page, so don't write as if it were on screen and don't describe a picture. Tell the user in one line that the report image isn't shown in this app and that you're working from the page's figures. Before the read, show the figures the read and your questions rely on (the headline figures and the rows your questions cite) as one small table, and say it is the page's summary, not the full page. Where the host shows the finstory story-page app anyway, the app tells you whether it is showing the report image or the page's figures as tables; from then on, write around what it shows. An image that was too large or failed to render is covered under "Notices in the pack" in [references/page-by-page.md](references/page-by-page.md).
+
+Either way, quote figures exactly as the pack gives them; don't recompute, rescale or combine them.
 
 ## Showing part of the business
 
