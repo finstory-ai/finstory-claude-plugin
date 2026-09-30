@@ -12,7 +12,7 @@ The finstory connector's `report_design_brief` tool returns layout patterns and 
 - **Percentages are proportions.** A ratio or relative-variance column is formatted as a percentage automatically; don't give it the report's thousands scale, which would show 0.229 as 0.
 - **Share of a reference.** A "% of revenue" column is a normal part of a statement: a hidden column fixed to the reference account plus a ratio column against it. The tool notes explain the mechanics.
 - **Variance columns show direction.** Use coloured figures when the reader needs both the size and whether it is favourable; use traffic lights when direction alone is enough.
-- **Levels are not flows.** A level such as headcount is never summed over periods. An account of type Balance shows its level in any view, so its quarter or year column shows the latest month. A level held in another account type is read at year to date, so a report that mixes it with a flow puts the view in its columns: year to date for the level, periodic for the flow.
+- **Levels are not flows.** A level such as headcount is never summed over periods. An account of type Balance shows its level in any view, so its quarter or year column shows the latest month. A level held in another account type of a scenario stored year to date is read at year to date, so a report that mixes it with a flow puts the view in its columns: year to date for the level, periodic for the flow.
 
 ## Choosing a visual
 
