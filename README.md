@@ -61,7 +61,7 @@ Claude picks the right skill from your request. You can also name it, for exampl
 
 - **The plugin itself contains only instructions.** The skills are text files. The plugin runs no code, stores nothing and contacts nothing on its own.
 - **The bundled connector** sends tool calls only to `https://mcp.finstory.ai`, on your behalf, after you sign in with your finstory login. Every call runs within your finstory role: it reads only what your role can read, and it creates or changes reports and stories only where your role allows.
-- **What the connector can change:** it creates and edits reports and stories in your finstory workspace. New reports stay hidden until they are published. It has no tool that deletes a whole report or story; it can remove single items (a story page, a tag, a report component or list item), and the skills tell Claude to do that only when you ask.
+- **What the connector can change:** it creates and edits reports and stories in your finstory workspace. A new report stays off the menu for readers and editors until it is published; changes to a report or story that is already published or shared show straight away. It has no tool that deletes a whole report or story; it can remove single items (a story page, a tag, a report component or list item), and the skills tell Claude to do that only when you ask.
 - **Approvals:** every connector tool is marked as read-only, additive, or able to overwrite, so Claude can ask for your approval before a change runs, depending on your Claude settings.
 - **Privacy policy:** https://finstory.ai/privacy#finstory-in-claude
 - **Documentation:** https://finstory.ai/docs/claude
