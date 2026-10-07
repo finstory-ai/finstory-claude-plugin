@@ -50,6 +50,8 @@ A page can show its report for one part of the business (a region, an entity, a 
 
 Stories show reports as they are. If a page doesn't fit, tell the user and choose another page or cut; change a report only when the user asks, using the report-builder skill.
 
+**Rebuilding a slide.** When the user shares a slide or deck page to recreate, match each chart and table on it to a report. For one no report shows, such as a bridge by P&L line, offer to build it with the report-builder skill rather than typing its figures into a text block: typed figures don't follow the data and go stale when the story rolls forward. Check the basis the slide states (consolidated or not, the period) against the report's before saying the figures match.
+
 ## Several models
 
 Each page shows one report, and each report lives in one model (`report_list` names it). Say which model each page reads, and never compare or add figures across models.

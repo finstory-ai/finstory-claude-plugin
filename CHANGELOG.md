@@ -2,6 +2,11 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## Unreleased
+
+- `board-story`: when the user shares a slide to recreate, Claude matches each chart and table to a report and offers to build a missing one with the report-builder skill, rather than typing its figures into a text block that goes stale when the story rolls forward. It checks the basis the slide states (consolidated or not, the period) before saying the figures match.
+- `report-builder`: a waterfall can bridge by P&L line (budget EBITDA through revenue and cost lines to actual EBITDA), built as a fixed list of accounts named by their account codes so costs subtract.
+
 ## 1.0.3 (2026-09-30)
 
 - `board-story`: works when a story page comes back without the report image, as it does on a host without MCP Apps such as Claude Code. The page notes decide: when the user is shown the rendered report, Claude writes around it as before; when no image came with the result, Claude says once that the report image isn't shown in this app, shows the page's headline figures and the rows its questions cite as one small table on each page, and writes from those figures without describing a picture. The skill also handles the notice that no image was rendered with the result and that the story-page app loads it itself, which can come with any result on any host: Claude doesn't call the image missing, and writes around what the app reports showing. An image the app could not show, and charts that failed to draw on it, are taken from the app's own update; the cases an earlier connector version sends (no notice, or a notice in the pack that the image was too large or could not be rendered) are kept. The page notes in each result decide over the connector's session tool notes.

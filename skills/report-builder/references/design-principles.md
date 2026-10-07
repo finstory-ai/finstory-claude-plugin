@@ -20,7 +20,7 @@ The finstory connector's `report_design_brief` tool returns layout patterns and 
 | --- | --- |
 | How did it move over time? | Line (one series); grouped bars to compare scenarios |
 | Did we beat or miss, period by period? | Variance area, rather than two lines on one chart |
-| What drove the change from A to B? | Waterfall, with the legs built from a breakdown dimension |
+| What drove the change from A to B? | Waterfall, with the legs built from a breakdown dimension, or from P&L lines (budget EBITDA through revenue and cost lines to actual EBITDA): a fixed list of accounts in the order the user reads them, each item named by its account code so costs subtract |
 | What share does each part have? | Pie up to about seven slices; beyond that go up a level or use a ranked bar |
 | How far are we toward a target? | Gauge tile |
 | Who are the top performers? | Rank tile, rolling the rest into "Others" |
