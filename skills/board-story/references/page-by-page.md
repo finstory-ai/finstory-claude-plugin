@@ -40,7 +40,7 @@ If a question genuinely needs a number the summary left out, `story_get_display_
 - **Headline (title):** the finding in a few words, with the decision word in the second part of the title. The `story_add_page` tool describes the title and subtitle markup it expects.
 - **Commentary (subtitle):** two or three short paragraphs, or the length the user asked for. Lead with the conclusion, back it with one or two figures from the pack, and fold in what the user told you.
 - **Storyline fields:** a short label ("Revenue") and a one-line takeaway for the sidebar.
-- **Notes on the report:** pin a note to the cell or chart point it explains, with a short badge. Keep one badge colour per meaning across the story.
+- **Notes on the report:** pin a note to the cell or chart point it explains. Its badge is one or two characters drawn in a small circle on the report, so number the notes 1, 2, 3 in reading order (or A, B, C) and put what each note is about in its title, never in the badge. Keep one badge colour per meaning across the story.
 - Quote every figure exactly as the pack gives it. Don't recompute, rescale or combine figures, and don't state a number that wasn't in the pack or the user's answers.
 
 ## Layout
