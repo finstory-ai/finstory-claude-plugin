@@ -2,7 +2,7 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
-## Unreleased
+## 1.0.4 (2026-10-10)
 
 - `board-story`: notes on a page are numbered 1, 2, 3 (or A, B, C) in reading order, with what each note is about in its title. A note's badge is drawn in a small circle on the report, where a word such as "EBITDA" was cut off and covered the figure; the finstory connector now refuses a badge longer than two characters.
 - `board-story`: when the user shares a slide to recreate, Claude matches each chart and table to a report and offers to build a missing one with the report-builder skill, rather than typing its figures into a text block that goes stale when the story rolls forward. It checks the basis the slide states (consolidated or not, the period) before saying the figures match.
