@@ -7,6 +7,7 @@ All notable changes to the finstory plugin are recorded here. The version is the
 - `board-story`: notes on a page are numbered 1, 2, 3 (or A, B, C) in reading order, with what each note is about in its title. A note's badge is drawn in a small circle on the report, where a word such as "EBITDA" was cut off and covered the figure; the finstory connector now refuses a badge longer than two characters.
 - `board-story`: when the user shares a slide to recreate, Claude matches each chart and table to a report and offers to build a missing one with the report-builder skill, rather than typing its figures into a text block that goes stale when the story rolls forward. It checks the basis the slide states (consolidated or not, the period) before saying the figures match.
 - `report-builder`: a waterfall can bridge by P&L line (budget EBITDA through revenue and cost lines to actual EBITDA), built as a fixed list of accounts named by their account codes so costs subtract.
+- `report-builder`: when the user shares a picture of a report to rebuild, Claude first writes down everything it shows (every component, table row, style and figure), builds it part by part (handing parts to sub-agents where the host offers them), then compares the rendered preview with the picture and fixes differences, for up to three rounds.
 
 ## 1.0.3 (2026-09-30)
 

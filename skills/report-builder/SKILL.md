@@ -20,6 +20,7 @@ This skill needs the finstory connector, which comes with this plugin. If the fi
 
 - If the user gave a topic ("a P&L for this year"), propose a complete design in a few lines: the scope in the header, the table's rows and columns, and any charts or tiles. Confirm it before building.
 - If the user described the layout, follow it and add only the components they asked for. Mention a useful extra as a one-line suggestion rather than building it.
+- If the user shared a picture of a report to rebuild, follow [references/from-a-picture.md](references/from-a-picture.md): spec first, build part by part, then check the preview against the picture.
 - Ask how figures should be shown (currency, thousands or millions, decimals) rather than assuming a currency. The number format in the brief is a system fallback, not the company's own setting. Counts such as headcount or FTE are not money, so ask about those too.
 - Offer choices as one short set (use a choice widget if the host has one), with at most about five options built from what the tools returned. Don't ask what the brief or the context already answers.
 
@@ -54,4 +55,5 @@ Show the user the finished preview and the key figures, and ask whether to publi
 
 - [references/design-principles.md](references/design-principles.md): what makes a clear finstory report, by report type.
 - [references/editing.md](references/editing.md): changing an existing report safely.
+- [references/from-a-picture.md](references/from-a-picture.md): rebuilding a report from a picture the user shares.
 - [references/wording.md](references/wording.md): internal terms and what to call them for the user.
