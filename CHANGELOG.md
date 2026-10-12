@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.5 (2026-10-12)
+
+- New skill `finstory-scroll-story`, until now shared as a separate zip: builds an interactive scroll story in finstory. Claude agrees an outline from the request, the data, the company context and last period's story; finstory drafts it without AI (`story_create` with `draft`); Claude asks at most three questions per chapter about what finstory's evidence shows stands out, judged against each line's usual monthly swing rather than a fixed percentage; records the user's answers with `story_update` (`scroll.answer`), stamped by finstory with who and when; and writes the words chapter by chapter, giving every step a basis: the data, the user's answer, or an assumption. Readers see that basis when they switch Basis on. Needs the finstory connector with scroll-story answers, evidence and drafts.
+
 ## 1.0.4 (2026-10-10)
 
 - `board-story`: notes on a page are numbered 1, 2, 3 (or A, B, C) in reading order, with what each note is about in its title. A note's badge is drawn in a small circle on the report, where a word such as "EBITDA" was cut off and covered the figure; the finstory connector now refuses a badge longer than two characters.

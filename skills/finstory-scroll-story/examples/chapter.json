@@ -1,0 +1,44 @@
+{
+  "id": "revenue",
+  "rail": "Revenue",
+  "section": "Sales",
+  "eyebrow": "September 2026 · Revenue",
+  "title": "Revenue {{revVar|updown}} {{revPct|pct abs}} on budget. | Online did most of it.",
+  "panel": {"title": "Revenue by month · $000", "chip": "vs budget", "chipTone": "info"},
+  "sources": {
+    "pl": {"report": "<report_id of a monthly P&L>", "pov": {"year": "2026", "period": "Sep"}},
+    "channels": {"slice": {"template": "cross_tab", "params": {"row_dimension": "<channel dimension>", "row_member": "<its top member>", "row_level": "children", "col_dimension": "category", "col_members": ["Actual", "Budget"], "account": "<revenue account>"}, "pov": {"year": "2026", "period": "Sep"}}}
+  },
+  "figures": {
+    "rev": {"$ref": "pl", "row": "Revenue", "col": "Actual"},
+    "revBud": {"$ref": "pl", "row": "Revenue", "col": "Budget"},
+    "revVar": {"$calc": "diff", "of": ["rev", "revBud"]},
+    "revPct": {"$calc": "pct", "of": ["rev", "revBud"]},
+    "online": {"$ref": "channels", "row": "Example Channel A", "col": "Actual"},
+    "onlineBud": {"$ref": "channels", "row": "Example Channel A", "col": "Budget"},
+    "onlineVar": {"$calc": "diff", "of": ["online", "onlineBud"]},
+    "onlineShare": {"$calc": "share", "of": ["onlineVar", "revVar"]}
+  },
+  "kpis": [
+    {"label": "Revenue", "value": "{{rev|money}}", "delta": "{{revVar|money +}}", "tone": "{{revVar|tone}}", "sub": "vs {{revBud|money}} budget"},
+    {"label": "Online", "value": "{{online|money}}", "delta": "{{onlineVar|money +}}", "tone": "{{onlineVar|tone}}", "sub": "vs {{onlineBud|money}}"}
+  ],
+  "visuals": [
+    {
+      "type": "bars", "unit": "k", "title": "Revenue by month · $000",
+      "categories": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+      "series": [{"name": "2026", "role": "focal", "values": {"$series": "pl", "row": "Revenue", "cols": [6, 7, 8, 9, 10, 11, 12, 13, 14]}}],
+      "marker": {"name": "Budget", "values": {"$series": "pl", "row": "Revenue budget", "cols": [6, 7, 8, 9, 10, 11, 12, 13, 14]}}
+    },
+    {
+      "type": "waterfall", "unit": "k", "title": "Budget to actual · $000",
+      "start": {"label": "Budget", "value": "revBud"},
+      "legs": [{"label": "Example Channel A", "short": "Channel A", "value": "onlineVar"}],
+      "end": {"label": "Actual", "value": "rev"}
+    }
+  ],
+  "steps": [
+    {"when": "September", "title": "Revenue {{revVar|money +}} on budget", "body": "Sales ran {{revPct|pct abs}} {{revVar|overunder}} plan for the month.", "visual": 0, "cats": ["Sep"], "kpi": 0},
+    {"when": "Channels", "title": "Channel A gave {{onlineShare|pct}} of it", "body": "The rest of the channels together made up the difference, shown as Other.", "visual": 1, "kpi": 1}
+  ]
+}

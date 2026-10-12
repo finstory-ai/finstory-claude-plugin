@@ -5,7 +5,7 @@ The finstory plugin for Claude, from Finstory, Inc. It connects Claude to your c
 The plugin bundles two things:
 
 - **The finstory connector**, a remote MCP server at `https://mcp.finstory.ai/mcp-finstory`. Its tools read your finstory data and, when you ask, create or change reports and stories in your finstory workspace. It works within your own finstory role and permissions.
-- **Three skills** that tell Claude how to work with finstory: how to answer a question about the numbers, how to build or edit a report, and how to build a board story.
+- **Four skills** that tell Claude how to work with finstory: how to answer a question about the numbers, how to build or edit a report, how to build a board story, and how to build an interactive scroll story.
 
 It works in Claude on the web and desktop (chat and Cowork) and in Claude Code.
 
@@ -46,6 +46,7 @@ After installing, open the plugin's **Connectors** tab, connect **finstory**, an
 | `financial-questions` | Answers questions about your numbers: variances against budget or prior year, cost lines, margins, trends and KPIs. Replies with a headline, one visual, a short reading of the drivers, and lettered options for the next cut. |
 | `report-builder` | Designs a finstory report with you, builds it as a hidden draft, previews the figures, and publishes it only when you agree. Also edits existing reports. |
 | `board-story` | Builds a board story one page at a time: agrees the pages and their order, shows each report page, asks what drove the key numbers, writes the headline and commentary, and saves the page. Where the report image can't be shown, as in Claude Code, it shows the page's key figures as a small table instead. Also rolls a story forward to a new period and exports it for PowerPoint, PDF or other formats. |
+| `finstory-scroll-story` | Builds an interactive scroll story in finstory: agrees an outline from your request, your data, the company context and last period's story; has finstory draft it without AI; asks you about what stands out (each movement against that line's usual monthly swing, unexplained gaps, uncategorized balances, last month's explanations that may no longer hold); keeps your answers with the story, with your name and the time; and writes it chapter by chapter, marking every step as data, your answer or an assumption. finstory fills in and sources every number. |
 
 Claude picks the right skill from your request. You can also name it, for example "use the finstory board-story skill".
 

@@ -9,7 +9,7 @@
     {
       "name": "finstory",
       "source": "./",
-      "description": "Answer questions about your finstory numbers, build and edit finstory reports, and draft board stories page by page. Bundles the finstory connector with three skills."
+      "description": "Answer questions about your finstory numbers, build and edit finstory reports, and draft board stories page by page, and build interactive scroll stories. Bundles the finstory connector with four skills."
     }
   ]
 }
