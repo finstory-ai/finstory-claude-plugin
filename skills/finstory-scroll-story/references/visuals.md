@@ -203,6 +203,8 @@ visual = html(markup, title="May · from sales to EBITDA", table={"head": ["", "
 ## 7 · Before you build
 
 - Does every chapter have one visual per claim, and every step a change on screen?
+- Does each second or third visual in a chapter add a measure, a time span or a breakdown, not the same rows against
+  another comparison? Do months, bridges and ratios appear where the findings call for them?
 - Is each comparison named for what it is (budget, last year, the reforecast, the 2025 run rate)?
 - Are cost lines in B/(W) terms, and their notes in words?
 - Is anything crowded: over 7 legs, 8 rows, 12 categories, 5 segments, long labels without short forms?

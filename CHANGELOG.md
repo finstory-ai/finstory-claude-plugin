@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.6 (2026-10-13)
+
+- `finstory-scroll-story`: each chapter argues one finding and shows it from the angles that prove it (the period against its comparisons, the trend by month, the breakdown, a ratio, a bridge, the effect on cash or the year), mixing chapters that walk one chart part by part with chapters that show one issue in two or three charts. A second chart must add a measure, a time span or a breakdown, not the same rows against another comparison. Chapters follow the findings and use the workspace's analysis reports and any earlier finstory story the user names; the draft is scaffolding, and the number of chapters follows the scope.
+
 ## 1.0.5 (2026-10-12)
 
 - New skill `finstory-scroll-story`, until now shared as a separate zip: builds an interactive scroll story in finstory. Claude agrees an outline from the request, the data, the company context and last period's story; finstory drafts it without AI (`story_create` with `draft`); Claude asks at most three questions per chapter about what finstory's evidence shows stands out, judged against each line's usual monthly swing rather than a fixed percentage; records the user's answers with `story_update` (`scroll.answer`), stamped by finstory with who and when; and writes the words chapter by chapter, giving every step a basis: the data, the user's answer, or an assumption. Readers see that basis when they switch Basis on. Needs the finstory connector with scroll-story answers, evidence and drafts.

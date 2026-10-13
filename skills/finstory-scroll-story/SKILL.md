@@ -12,7 +12,7 @@ keeps it private until a power user or admin publishes it.
 **The one rule: you never write a number.** You read the data to understand it, then you write words and
 references. finstory reads every reference as the saving user, fills it in, formats it the way the app does, and
 stores a receipt per number. A digit typed into text, or a number typed into chart data, is refused, and the error
-names the chapter and field. The one place a typed number is kept is an answer the user gave (section 5).
+names the chapter and field. The one place a typed number is kept is an answer the user gave (section 6).
 
 **Trust and memory come first.** A CFO must be able to tell, for every step, whether it comes from the data, from
 something the user told you, or from your own reading. And what the user tells you this month is kept with the story,
@@ -22,7 +22,7 @@ so next month starts from it.
 |---|---|---|
 | `references/reference-format.md` | sources, figures, placeholders, calculations, series, bridges, answers, basis, evidence, the draft | before the first save |
 | `references/spec.md` | every field of a chapter, visual and step (the shape finstory draws) | when you need a field |
-| `references/visuals.md` | which visual for which data shape | before rewriting a drafted chart |
+| `references/visuals.md` | which visual for which data shape | before planning the outline |
 | `references/writing.md` | headlines, steps, claims you can defend, stale commentary | before writing |
 | `examples/chapter.json` | one complete chapter by reference (invented data) | before the first chapter |
 
@@ -48,9 +48,18 @@ Four inputs decide the chapters. Gather them before proposing anything, in one r
 
 ## 2 · Propose the outline
 
-An outline is the chapter list before any words: per chapter an `id`, a working `title` (words only, no figures) and
-its `datasets` (sources, reference-format.md section 1). It is bespoke: start from last period's chapters when there
-are any, then adjust to this month's request, data and memory.
+An outline is the chapter list before any words: per chapter an `id`, a working `title` (words only, no figures), the
+finding it argues, and its `datasets` (sources, reference-format.md section 1), one per angle (section 3). It is
+bespoke: start from last period's chapters when there are any, then adjust to this month's request, data and memory.
+
+- **Chapters follow findings, not reports.** Read the story-ready reports first (`report_preview_values` with
+  `dataset: true`, all in one message) and find what the period is about: what moved, what explains it, what it does
+  to the year and to cash. Each finding is a chapter. One report can feed several chapters, one chapter several
+  reports.
+- **Use the workspace's analysis reports.** Bridges, mix, conversion, cost, working-capital and forecast reports carry
+  the angles a P&L alone does not; a slice (`analysis_query`) fills an angle no report shows.
+- **An existing finstory story** the user names (`story_get`) is a ready outline: each content page becomes a
+  chapter, and pages that make one argument merge into one chapter with several visuals.
 
 Guidelines, not a template:
 - **Monthly management or board story**: the headline month; revenue against budget and last year, by the dimension
@@ -61,12 +70,41 @@ Guidelines, not a template:
   year and the prior month; never invent a budget.
 - A monthly trend slice of a chapter's main line (`analysis_query` `trend`, 12 months) lets finstory say how unusual
   this month's movement is for that line. Add one where a chapter's finding is a movement.
-- Six to nine chapters. A chapter without data is left out, never shown empty.
+- Length follows the scope: a flash update can be five chapters, a full board pack twelve to fifteen. A chapter
+  without data is left out, never shown empty.
 
-Show the outline to the user as a short numbered list (chapter titles and what each shows) and adjust it once. Don't
-read figures out to them at this stage.
+Show the outline to the user as a short numbered list (per chapter its title, its finding in a line and its angles)
+and adjust it once. Don't read figures out to them at this stage.
 
-## 3 · Draft without AI
+## 3 · Design each chapter: one finding, seen from the angles that prove it
+
+A chapter argues one finding, its headline. Its visuals are the angles that prove it, and its steps walk the reader
+through them. The angles:
+
+| angle | shows | visual |
+|---|---|---|
+| level | this period against budget and last year | `columns` with `delta`, KPI tiles |
+| trend | the same measure month by month, so the reader sees whether this period is normal | `bars` with a budget `marker`; `line` for a ratio |
+| breakdown | which items made it: channel, product, store, cost line | `hbars` variance, or with a `compare` tick |
+| ratio | what each unit keeps or costs: a margin, a conversion, fees as a share of sales, days | `line` or `columns` |
+| bridge | from the comparison to the result, leg by leg | `waterfall`, one leg revealed per step |
+| consequence | what it does to the year, to cash or to capital: year to date, forecast, net debt | `columns`, `bars`, `line` |
+
+Mix two kinds of chapter through the story, roughly half each:
+- **One chart, walked part by part.** A bridge, a variance list or a monthly trend carries the whole finding; each
+  step highlights one leg, row or stretch of months (`reveal`, `rows`, `cats`) and says what it adds.
+- **One issue, two or three angles.** "Sales up, margin down": the month against both comparisons, then the margin,
+  then the year to date. "Profit converts less": profit by month, then the month against budget. "Stock built up":
+  inventory, then net debt, then working capital as a share of revenue. Steps move between the visuals and highlight
+  within them.
+
+A second visual must add a measure, a time span or a breakdown. The same rows against another comparison (against
+budget, then against last year) is not an angle: show both comparisons in one chart (a `compare` tick, a `marker`, two
+series) or with the switch. Across the story, months (bars and lines) belong in most chapters that argue a movement,
+a bridge where a result moved against plan, ratios where the company profile names them as KPIs; no single visual type
+carries most of the story.
+
+## 4 · Draft without AI
 
 ```
 story_create(storyId, pov: {year, period}, draft: {meta: {title, company, context, currency}, basedOn?: "<last period's documentId>", chapters: [{id, title, datasets}]})
@@ -76,12 +114,15 @@ finstory reads every dataset at once and saves a complete first draft: charts, K
 where the data has both, steps from the movements that stand out, and empty text. The reply gives:
 - `draft.slots`: each empty text (title, lead, step bodies) and the figure names it may use;
 - `draft.left_out`: datasets or chapters with no figures, and why. Tell the user what was left out;
-- `evidence`: per chapter, the facts to weigh (section 4).
+- `evidence`: per chapter, the facts to weigh (section 5).
+
+The draft draws one plain chart per dataset: it is scaffolding. Its sources, figures and evidence are what you keep;
+the chapter design (section 3) is yours.
 
 `pov` records the period the story covers; `basedOn` links it to last period's story, which is what makes "still
 true?" work next.
 
-## 4 · Ask before you guess
+## 5 · Ask before you guess
 
 The evidence is finstory's list of facts, with no threshold applied. You judge what needs an explanation:
 
@@ -101,7 +142,7 @@ Ask at most three questions per chapter, fewer when nothing stands out. Ask them
 naming the figure it is about in words ("Revenue came in well above budget, about three times its usual monthly
 swing: what drove it?"). The user may answer some, skip some, or say "I don't know".
 
-## 5 · Record the answers
+## 6 · Record the answers
 
 For each answer:
 ```
@@ -113,14 +154,15 @@ story_update(documentId, scroll: {answer: {chapter, q, a, fig?}})
   paraphrase the answer, but a number the user said appears only inside it, never as a typed figure in a step.
 - A correction replaces the earlier answer: pass its `id`.
 
-## 6 · Write chapter by chapter
+## 7 · Write chapter by chapter
 
 Replace each drafted chapter with its words:
 ```
 story_update(documentId, scroll: {chapter: {...the drafted chapter from story_get, with title, lead and steps written}})
 ```
-- Start from `story_get(documentId)`'s outline: keep its `sources`, `figures` and visuals, rewrite the words, and
-  change a visual only when references/visuals.md calls for another one.
+- Start from `story_get(documentId)`'s outline: keep its `sources` and `figures`, then give the chapter the angles
+  its design calls for (section 3): turn each drafted chart into the type its angle needs (references/visuals.md),
+  add a source for a missing angle, and drop a drafted chart that repeats another. Every step changes the picture.
 - **Every step rests on something**, and says which:
   - **data**: its text uses the chapter's figures; nothing else to add;
   - **an answer**: `"basis": {"answers": ["a1"]}` when the step says what the user told you;
@@ -133,7 +175,7 @@ story_update(documentId, scroll: {chapter: {...the drafted chapter from story_ge
 Readers who switch Basis on see every step marked Data, Your answer or Assumption, with the source and period, the
 answer word for word with who and when, or the assumption.
 
-## 7 · Writing rules that matter most
+## 8 · Writing rules that matter most
 
 - Headlines say the finding in two short sentences split by `|`, each under about 26 characters; the second shows in
   green. The words come from the figures: "Revenue {{revVar|updown}} {{revPct|pct abs}} on budget." reads "up" or
@@ -146,7 +188,7 @@ answer word for word with who and when, or the assumption.
   placeholder.
 - KPI subs at most 22 characters; short forms (`short`, `categoryShort`) for labels that can be cut on a phone.
 
-## 8 · Reply
+## 9 · Reply
 
 Two to four lines: what the story covers, what the user's answers added, what was left out or assumed, and the
 story_url. The story is private to the user until a power user or admin publishes it in the app.
