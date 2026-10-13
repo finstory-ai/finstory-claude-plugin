@@ -44,7 +44,7 @@ its components (KPI cards, charts, tables) and their figures.
 | Combo (bars + line on two axes) | `bars` and `line`, two visuals | the line usually carries a % (margin, growth) |
 | Stacked columns by segment | `stacked` | `mode="share"` for mix, `"abs"` for totals; max 5 segments |
 | Pie or donut | `hbars` sorted, `unit="pct"` | or `stacked` share with one column when 2–4 parts |
-| Variance table, B/(W) by row | `hbars` with `mode="variance"` | sort `"abs"`; cost rows: B/(W), not the raw change |
+| Variance table, B/(W) by row | `hbars` with `mode="variance"` | sort `"desc"` (best to worst, so colours don't zig-zag); cost rows: B/(W), not the raw change |
 | Actual vs budget vs last year of one figure | `columns` with `delta` | three columns, bracket between two |
 | Gauge, progress to target | `meter` | `goal` for the target, `marks` for budget and last year |
 | Bullet (actual vs target per row) | `hbars` with `compare` | the tick is the target |
@@ -68,7 +68,7 @@ its components (KPI cards, charts, tables) and their figures.
 | actual months then forecast | `bars` with `forecastFrom` or `line` with `dashedFrom` (both per series) | `bars(cats, [{"name": "2026", "values": vals, "forecastFrom": 6, "forecastLabel": "Reforecast"}], "m")` |
 | what bridges A to B | `waterfall` | `bridge(("Budget", k1(b)), legs, ("Actual", k1(a)), "k", vsLabel="budget")` |
 | how a margin moved, driver by driver | `waterfall`, totals in %, legs in pts | `bridge(("May 2025", 0.286), [("Staff", 0.023, "Staff"), ...], ("May 2026", 0.330), "pct", legUnit="pts")` |
-| which items beat or missed | `hbars` variance | `hbars([(name, k1(v), overunder(chg))], "k", mode="variance", sort="abs")` |
+| which items beat or missed | `hbars` variance, best to worst | `hbars([(name, k1(v), overunder(chg))], "k", mode="variance", sort="desc")` |
 | the size of items, ranked | `hbars` value | `hbars(rows, "k", sort="desc", total=("Total", k1(t)))` (the total is printed, not drawn) |
 | the mix (shares of a whole) over time | `stacked` share | `stacked(cats, [(seg, vals)], mode="share")` |
 | one figure against two comparisons | `columns` | `columns([("2025", ly), ("Budget", b), ("2026", a)], "m", delta=(1, 2))` (for a % the pill reads in pts) |
@@ -92,8 +92,11 @@ its components (KPI cards, charts, tables) and their figures.
   pushes small rounding into the largest leg by default; `plug=None` raises instead, so real gaps surface. Use
   `allowGap` only when the source report itself doesn't close, and say so in the data notes.
 - *Small legs on big totals*: the engine cuts the axis of money bridges automatically, with break marks and an "Axis
-  starts at" note. Set `axisFrom=0` when the totals' sizes against each other are the finding (net debt up 58%, a
-  margin halving), since a cut exaggerates the change. Ratio bridges start at zero unless you zoom with `axisFrom`. *Negative start or end* (a loss): fine, the axis goes below zero.
+  starts at" note. Keep the cut only when the change is under 5% of the base; set `axisFrom=0` otherwise, and when
+  the totals' sizes against each other are the finding (net debt up 58%, a margin halving), since a cut exaggerates
+  the change. A cost overrun of a few lines is a variance `hbars`, not a cost bridge.
+- *Capital and cash bridges*: an asset build (inventory, receivables) is a use of cash, so it must not read green:
+  give the leg `tone: "bad"` (or `invert` the bridge), and keep the KPI tile's tone the same. Ratio bridges start at zero unless you zoom with `axisFrom`. *Negative start or end* (a loss): fine, the axis goes below zero.
 - *A bridge per lens option*: build each with its own comparison and wrap them, `LZ(bridge_from_budget,
   bridge_from_last_year)`; give their steps lens-aware `reveal` and `rows` when the legs differ.
 - *A margin walk*: margins don't add like money, but their point changes do: totals in `pct` (fractions), legs in
@@ -141,6 +144,7 @@ its components (KPI cards, charts, tables) and their figures.
   points (`shorts={"Marketplace & payment fees": "Fees"}` on the helpers). `check` lists each label it cut. The
   tooltip, the Data table and the appendix keep the full names.
 - More than 12 categories: bars thin their labels automatically; for 24–36 months prefer `line`.
+- A line whose values move less than 2% across the chart says nothing as a chart: use a table or a sentence.
 - More than 8 rows: top 7 by size plus "Other" in the chart and every row in the Data table:
   `top_hbars(rows, n=7, other='{k} other lines')`; the appendix only when the list is a finding in itself.
 - More than 5 segments: fold the smallest into "All other" (the stacked chart warns above 6).

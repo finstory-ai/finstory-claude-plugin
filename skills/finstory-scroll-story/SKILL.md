@@ -12,7 +12,8 @@ keeps it private until a power user or admin publishes it.
 **The one rule: you never write a number.** You read the data to understand it, then you write words and
 references. finstory reads every reference as the saving user, fills it in, formats it the way the app does, and
 stores a receipt per number. A digit typed into text, or a number typed into chart data, is refused, and the error
-names the chapter and field. The one place a typed number is kept is an answer the user gave (section 6).
+names the chapter and field. The one exception is the user's own numbers: kept in their answers, and written out
+in the steps that cite them (section 6).
 
 **Trust and memory come first.** A CFO must be able to tell, for every step, whether it comes from the data, from
 something the user told you, or from your own reading. And what the user tells you this month is kept with the story,
@@ -63,7 +64,8 @@ bespoke: start from last period's chapters when there are any, then adjust to th
 
 Guidelines, not a template:
 - **Monthly management or board story**: the headline month; revenue against budget and last year, by the dimension
-  the company manages by; gross margin; costs; EBITDA or profit bridge; cash; a detail or appendix table.
+  the company manages by; gross margin; costs; EBITDA or profit bridge; cash; the outlook (the year as forecast and,
+  where the data holds it, next year against management's outlook); a detail or appendix table.
 - **Small business, no budget** (typically QuickBooks): the headline month; revenue against last year, by customer and
   product where the books hold them; gross margin and the top cost movers; balance sheet, cash and working capital;
   class or location mix only if tracked; a data-quality chapter for whatever the evidence flags. Compare with last
@@ -101,8 +103,15 @@ Mix two kinds of chapter through the story, roughly half each:
 A second visual must add a measure, a time span or a breakdown. The same rows against another comparison (against
 budget, then against last year) is not an angle: show both comparisons in one chart (a `compare` tick, a `marker`, two
 series) or with the switch. Across the story, months (bars and lines) belong in most chapters that argue a movement,
-a bridge where a result moved against plan, ratios where the company profile names them as KPIs; no single visual type
-carries most of the story.
+a bridge where a result moved against plan, ratios where the company profile names them as KPIs.
+
+- **One frame.** Hold the story to one frame (the month, with budget and last year on the switch). A chapter on
+  another basis (year to date, a balance against December) says so in its eyebrow.
+- **The answer, the bridge, then the drivers.** The bridge comes before the chapters that explain its legs and stays
+  at total level (revenue, cost of sales, overheads); the chapters after it add what a bridge cannot: rates, shares of
+  revenue, reasons. Two chapters never draw the same legs.
+- **Chart budget.** No visual type more than four times in a story; a three-column comparison only where the three-way
+  contrast is the point; the hero's chart is never a chapter's main chart; six or more periods read as a line or bars.
 
 ## 4 · Draft without AI
 
@@ -144,15 +153,16 @@ swing: what drove it?"). The user may answer some, skip some, or say "I don't kn
 
 ## 6 · Record the answers
 
-For each answer:
+All of them in one call, as soon as the user replies:
 ```
-story_update(documentId, scroll: {answer: {chapter, q, a, fig?}})
+story_update(documentId, scroll: {answers: [{chapter, q, a, fig?}, ...]})
 ```
-- `q` your question, `a` the user's answer in their own words (shorten, don't reword), `fig` the figure it explains.
-- finstory stamps who (the signed-in user, recorded via Claude) and when; the reply gives the answer's `id`.
-- The answer text keeps the user's numbers word for word. They stay in the answer: the narrative may quote or
-  paraphrase the answer, but a number the user said appears only inside it, never as a typed figure in a step.
-- A correction replaces the earlier answer: pass its `id`.
+- `q` your question, `a` the user's answer in their own words (shorten, don't reword), `fig` the figure it explains:
+  a figure the chapter already has (a drafted name); leave it out otherwise.
+- finstory stamps who (the signed-in user, recorded via Claude) and when; the reply gives each answer's `id`.
+- The answer text keeps the user's numbers word for word, and a step that cites the answer in its basis may write
+  them out ("the fee rose from 3% to 5%"). Everywhere else a number is a placeholder.
+- A correction replaces the earlier answer: `answer: {id, chapter, q, a}`.
 
 ## 7 · Write chapter by chapter
 
@@ -170,7 +180,12 @@ story_update(documentId, scroll: {chapter: {...the drafted chapter from story_ge
     is your own reading. Say it as a reading in the text too ("most likely…").
   A step can rest on data and an answer at once. A basis citing an answer the chapter does not have is refused.
 - Never state a cause the data does not show without an answer or an assumption behind it.
-- Then the hero (`{hero}`) and, if useful, the appendix.
+- Carry the user's figures into the steps that cite them ("about $2M of actions", "terms cut from 60 to 45 days"):
+  they are what a board remembers. Never name the process in reader text: no "management's answer", "the Q&A",
+  "as the user said".
+- In a chapter with the switch, every title, lead, KPI and step reads right under both options: a budget figure only
+  in the budget text, a last-year figure only in the last-year text.
+- Then the hero (`{hero}`) and the appendix, with `notes` listing the data gaps the story could not close.
 
 Readers who switch Basis on see every step marked Data, Your answer or Assumption, with the source and period, the
 answer word for word with who and when, or the assumption.
@@ -182,13 +197,30 @@ answer word for word with who and when, or the assumption.
   "down" by itself.
 - Name every comparison by what it is ("vs budget", "on last May"). A column labelled "LY" may hold something else:
   check one figure before trusting a label.
-- Steps: `when` 1–3 words, `title` the finding with its figure, `body` one or two sentences.
+- A headline has a verb and a cause ("Freight, not volume, cost the margin"), not a restatement of the variance.
+- A verb that claims a movement ("fell", "turned negative", "halved", "lengthening") needs a figure that clears
+  materiality: at least 5%, or the board's own threshold. A comparison needs both sides in the data; without one,
+  drop the claim.
+- The same name with different values in two views (a channel and a product line with one name) gets one line
+  saying why they differ.
+- Steps: `when` 1–3 words, `title` the finding with its figure, `body` one or two sentences; about 100 words per
+  chapter in all.
 - Text may name years, period names (Q3, FY26, H1, P09), dates (30 Sep), chapter numbers, the story's own names, its
   sources' names, and any row or column label of the chapter's own sources ("4000 Sales"). Every other number is a
   placeholder.
 - KPI subs at most 22 characters; short forms (`short`, `categoryShort`) for labels that can be cut on a phone.
 
-## 9 · Reply
+## 9 · Review before you reply
+
+Read the story back (`story_get`) and check every chapter; fix what fails, then reply:
+- each step's chart shows the figure its title names;
+- no visual type more than four times; no chapter repeats the hero's chart or another chapter's legs;
+- every movement verb has a material figure behind it, and every comparison both sides;
+- switched chapters hold nothing from the other comparison;
+- the numbers of cited answers are in the steps, and no process words are;
+- tones agree: a KPI tile and its bar carry the same colour, and a stock build is a use of cash.
+
+## 10 · Reply
 
 Two to four lines: what the story covers, what the user's answers added, what was left out or assumed, and the
 story_url. The story is private to the user until a power user or admin publishes it in the app.

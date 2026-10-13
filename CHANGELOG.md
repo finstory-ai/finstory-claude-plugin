@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.7 (2026-10-13)
+
+- `finstory-scroll-story`: answers are recorded in one call (`scroll.answers`), and a step that cites an answer writes out the user's own figures, never the process behind them. The story holds one frame, puts the bridge before the chapters that explain its legs (never drawing the same legs twice), keeps each chart type to four uses and the hero's chart out of the chapters, and reads right under both switch positions. Headlines carry a verb and a cause; movement verbs need a material figure and comparisons both sides. Variance lists sort best to worst, axis cuts only for small changes, and a stock build in a cash or capital bridge reads as a use of cash. A last review pass checks all of this before the reply. Needs the finstory connector with `scroll.answers`.
+
 ## 1.0.6 (2026-10-13)
 
 - `finstory-scroll-story`: each chapter argues one finding and shows it from the angles that prove it (the period against its comparisons, the trend by month, the breakdown, a ratio, a bridge, the effect on cash or the year), mixing chapters that walk one chart part by part with chapters that show one issue in two or three charts. A second chart must add a measure, a time span or a breakdown, not the same rows against another comparison. Chapters follow the findings and use the workspace's analysis reports and any earlier finstory story the user names; the draft is scaffolding, and the number of chapters follows the scope.
