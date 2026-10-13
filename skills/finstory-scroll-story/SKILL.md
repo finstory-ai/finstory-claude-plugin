@@ -212,9 +212,13 @@ answer word for word with who and when, or the assumption.
 
 ## 9 · Review before you reply
 
-Read the story back (`story_get`) and check every chapter; fix what fails, then reply:
+Every save reply gives `charts` (charts per type across the chapters) and `repeatsHero` (chapters whose chart
+draws the hero's figures again). Read the story back (`story_get`) and check every chapter; fix what fails, then
+reply:
+- `charts` has no type above four and `repeatsHero` is absent; otherwise redesign the chapters it points at (another
+  angle, not the same chart) and save them again;
 - each step's chart shows the figure its title names;
-- no visual type more than four times; no chapter repeats the hero's chart or another chapter's legs;
+- no chapter repeats another chapter's legs;
 - every movement verb has a material figure behind it, and every comparison both sides;
 - switched chapters hold nothing from the other comparison;
 - the numbers of cited answers are in the steps, and no process words are;

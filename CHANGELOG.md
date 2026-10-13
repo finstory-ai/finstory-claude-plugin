@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.8 (2026-10-13)
+
+- `finstory-scroll-story`: the review pass reads the chart mix finstory now returns on every save (`charts` per type, `repeatsHero`) and redesigns the chapters that push a chart type past four or draw the hero chart again. Needs the finstory connector with the chart mix in its save reply.
+
 ## 1.0.7 (2026-10-13)
 
 - `finstory-scroll-story`: answers are recorded in one call (`scroll.answers`), and a step that cites an answer writes out the user's own figures, never the process behind them. The story holds one frame, puts the bridge before the chapters that explain its legs (never drawing the same legs twice), keeps each chart type to four uses and the hero's chart out of the chapters, and reads right under both switch positions. Headlines carry a verb and a cause; movement verbs need a material figure and comparisons both sides. Variance lists sort best to worst, axis cuts only for small changes, and a stock build in a cash or capital bridge reads as a use of cash. A last review pass checks all of this before the reply. Needs the finstory connector with `scroll.answers`.
