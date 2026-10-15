@@ -1,13 +1,15 @@
 {
   "name": "finstory",
   "displayName": "finstory",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Work with your finstory workspace in Claude: answer questions about actuals, budget and forecast, build and edit finstory reports, and draft board stories page by page, and build interactive scroll stories. Bundles the finstory connector with four skills.",
   "author": {
     "name": "Finstory, Inc.",
     "url": "https://finstory.ai"
   },
   "homepage": "https://finstory.ai/docs/claude",
+  "privacyPolicyUrl": "https://finstory.ai/privacy#finstory-in-claude",
+  "icon": ".claude-plugin/icon.png",
   "repository": "https://github.com/finstory-ai/finstory-claude-plugin",
   "license": "Apache-2.0",
   "keywords": [

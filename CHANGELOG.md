@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.9 (2026-10-15)
+
+- Listing assets for the Claude Directory: the finstory icon (`.claude-plugin/icon.png`, 512×512) and the privacy policy URL in `plugin.json`. No skill changes.
+
 ## 1.0.8 (2026-10-13)
 
 - `finstory-scroll-story`: the review pass reads the chart mix finstory now returns on every save (`charts` per type, `repeatsHero`) and redesigns the chapters that push a chart type past four or draw the hero chart again. Needs the finstory connector with the chart mix in its save reply.
