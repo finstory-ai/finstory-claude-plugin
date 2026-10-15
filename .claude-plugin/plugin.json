@@ -9,6 +9,8 @@
   },
   "homepage": "https://finstory.ai/docs/claude",
   "privacyPolicyUrl": "https://finstory.ai/privacy#finstory-in-claude",
+  "termsOfServiceUrl": "https://finstory.ai/terms",
+  "supportUrl": "https://finstory.ai/docs/claude#get-help",
   "icon": ".claude-plugin/icon.png",
   "repository": "https://github.com/finstory-ai/finstory-claude-plugin",
   "license": "Apache-2.0",

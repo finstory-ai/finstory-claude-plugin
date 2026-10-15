@@ -4,7 +4,7 @@ All notable changes to the finstory plugin are recorded here. The version is the
 
 ## 1.0.9 (2026-10-15)
 
-- Listing assets for the Claude Directory: the finstory icon (512×512) and the privacy policy URL in the plugin manifest. No skill changes.
+- Listing assets for the Claude Directory: the finstory icon (512×512) and the privacy policy, terms of service and support URLs in the plugin manifest. No skill changes.
 
 ## 1.0.8 (2026-10-13)
 
