@@ -92,7 +92,10 @@ with other ids. A story has at most one lens.
   `tone` (`good`, `bad`, `flat`), so a cost that fell reads "▼ −6.2%" in green. A delta that is empty or `None` (also
   under one lens option) is hidden. Clicking a tile jumps to the first
   step that points at it. Keep `sub` to one comparison of at most 22 characters and `label` to 20: longer ones are
-  cut on phones and in rows of four tiles (`validate` warns).
+  cut on phones and in rows of four tiles (`validate` warns). `sub2` adds a second line under `sub` ("38.8% June YTD
+  budget"). Tiles that share a `row` label sit in one row with that label on its left ("Jan–Jun Actuals", then
+  "Jan–Jul Forecast"). A goal given by management is a recorded answer: a tile with `basis: {"answers": ["a1"]}`
+  may write out the numbers that answer says ("40% annual goal"). The hero's `stat` takes none of these.
 - `filter`: chips above the chart. A chip highlights its key in every visual of the chapter that has it (a category,
   series, row, leg, point label or group) and leaves the others alone. Keys must match the visual labels exactly.
 
@@ -143,7 +146,7 @@ included, so a short form must read well on its own.
 | `stacked` | `categories[]`, `categoryShort[]`, `series[{name, role, values[]}]` (max 5; the amounts, not shares), `unit` (of the totals above the columns) | `stacked(cats, series, mode, unit)` |
 | `columns` | `unit`, `items[{label, short, sub, value, role}]`, `delta{from, to, text}` (a bracket and pill between two items) | `columns([(label, value, role, sub)], unit, delta=(0, 2[, text]), shorts={})` |
 | `meter` | `unit`, `domain[lo, hi]`, `value{label, value}`, `marks[{label, value, role}]`, `goal{label, value}`, `caption` | `meter((label, v), domain, marks, goal)` |
-| `table` | `columns[]`, `rows[{label, cells[], level: "detail" \| "sub" \| "total" \| "ratio", invert}]`, `signCols[]` (green/red by sign; `invert` flips a row), `corner`, `note` | `table(cols, [pl_row(...)], sign_cols=[2, 3])` |
+| `table` | `columns[]`, `rows[{label, cells[], level: "detail" \| "sub" \| "total" \| "ratio", invert, tone}]` (`tone`: an accent band, `s1`–`s5`, `focal`, `good`, `bad`), `signCols[]` (green/red by sign; `invert` flips a row), `groups[{label, span}]` (headers over consecutive columns from the first; an empty label leaves a gap), `corner`, `note` | `table(cols, [pl_row(...)], sign_cols=[2, 3])` |
 | `heatmap` | `unit`, `columns[]`, `rows[{label, values[], level, invert}]`, `mode: "diverging" \| "sequential"` (default: diverging when any value is negative), `invert`, `max` (caps the colour scale), `goodLabel`, `badLabel`, `corner`, `dp` | `heatmap(cols, [(label, values, invert)], unit, mode)` |
 | `scatter` | `xUnit`, `yUnit`, `points[{label, short, x, y, size, group, role}]`, `xLabel`, `yLabel`, `xName`, `yName`, `sizeName`, `sizeUnit`, `refX`, `refY` (a number or `{value, label}`), `quadrants{tl, tr, bl, br}`, `labels: "auto" \| "all" \| "none"`, `xMin/xMax/yMin/yMax`, `xZero`, `yZero` | `scatter([(label, x, y, size, group)], x_unit, y_unit, x_label, y_label, shorts={})` |
 | `cards` | `items[{k, title, value, body, tone}]` (`value`: a figure with a format, `{"$fig": "rev", "fmt": "money"}`; `tone`: an accent, `s1`–`s5`, `good`, `bad`), `cols` (max 3) | `cards([(k, title, body)])` |

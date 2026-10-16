@@ -62,6 +62,7 @@ Any text field can hold `{{name|format}}`:
 | `num` | 1,250 | counts |
 | `pct` | 39.4% | a ratio, a % change, a share |
 | `pts` | 1.4 pts | a change in a ratio |
+| `bps` | 140 bps | a change in a ratio, in basis points |
 | `x` | 2.5x | a multiple |
 | `updown`, `higherlower`, `overunder`, `betterworse`, `tone` | up/down/flat, higher/lower/unchanged, over/under/on, better/worse/in line, good/bad/flat | words from the sign |
 
