@@ -164,8 +164,8 @@ Notes on behaviour:
   that would collide are dropped, the latest point winning, and a `callout` replaces the label at its point.
   `dashedFrom` (a category name or index) dashes the series from that point on and lightens the focal points there:
   a projection. `dash: "dashed"` or `"dotted"` draws a whole series so (actual, budget and forecast as three cumulative
-  lines). `bands` shade the range `from`–`to` from `fromCat` on, with `label` inside the band and `above`/`below`
-  beside it ("<20% chance"). Band edges and a reference line's `value` are figures; when management gave them (a
+  lines). `bands` shade the range `from`–`to` from `fromCat` on, with texts right of the plot: `label` level with the band,
+  `above` and `below` over and under it ("<20% chance"). Band edges and a reference line's `value` are figures; when management gave them (a
   goal, a likely range), record the answer and give the band or line `basis: {"answers": ["a2"]}`: its edges, value
   and labels may then write out the numbers that answer says, in the chart's unit (a `pct` value as its fraction:
   "40%" is 0.4). Any other typed number is refused. Bands always show. `zeroBased: false` lets the axis start near the data (ratios, margins).
