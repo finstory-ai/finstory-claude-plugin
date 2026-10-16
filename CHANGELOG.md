@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.10 (2026-10-16)
+
+- `finstory-scroll-story`: text-only chapters. A chapter with no visuals is a statement (one large phrase per step, building up as the reader scrolls) for the headline message and section openers; cards take a coloured accent (`tone`) and a figure (`value`) and light up per step (`item`); `timeline` is drawn, moving through its phases per step (`phase`) with a "Today" mark. The line `dashedFrom` and `area` fields, which finstory refuses, are no longer recommended. Needs the finstory app and document service with text chapters (KAN-258).
+
 ## 1.0.9 (2026-10-15)
 
 - Listing assets for the Claude Directory: the finstory icon (512×512) and the privacy policy, terms of service and support URLs in the plugin manifest. No skill changes.

@@ -2,9 +2,9 @@
 
 > **How this applies inside finstory.** This file lists every field finstory's story engine draws. You write the same
 > fields through the connector, but every number is a reference (reference-format.md): the numbers shown below are
-> what finstory fills in. finstory draws bars, hbars, columns, waterfall, line, table and cards; stacked, meter,
-> heatmap, scatter, timeline and html are refused, as are line `bands`/`refs`, step `zoom`/`upto`, the theme
-> button and `meta.storyUrl`'s link. Sections 9's `storylib`/`storykit` checks are replaced by finstory's own
+> what finstory fills in. finstory draws bars, hbars, columns, waterfall, line, table, cards and timeline, and a
+> chapter with no visuals at all (a statement, section 6); stacked, meter, heatmap, scatter and html are refused, as
+> are line `bands`, `dashedFrom` and `area`, step `zoom`/`upto`, the theme button and `meta.storyUrl`'s link. Sections 9's `storylib`/`storykit` checks are replaced by finstory's own
 > checks on save and in the app.
 
 The page is one JSON spec (`story.json`) rendered by `assets/engine.js`. Builders write it with
@@ -81,7 +81,7 @@ with other ids. A story has at most one lens.
             "source": "Report “Conversion GP into EBITDA”"},
   "kpis": [{"label": "EBITDA", "value": "$1.32M", "delta": "+$354K", "tone": "good", "sub": "vs $971K budget"}],  // up to 4 shown per row
   "filter": {"label": "Highlight a channel", "keys": ["Online - Direct", "In-Store Sales"], "all": "All"},
-  "visuals": [ /* one or more visuals, section 6 */ ],
+  "visuals": [ /* one or more visuals, section 6; none makes the chapter a statement */ ],
   "steps": [ /* section 5 */ ],
   "tint": true                          // optional: force the tinted background (default alternates)
 }
@@ -146,11 +146,14 @@ included, so a short form must read well on its own.
 | `table` | `columns[]`, `rows[{label, cells[], level: "detail" \| "sub" \| "total" \| "ratio", invert}]`, `signCols[]` (green/red by sign; `invert` flips a row), `corner`, `note` | `table(cols, [pl_row(...)], sign_cols=[2, 3])` |
 | `heatmap` | `unit`, `columns[]`, `rows[{label, values[], level, invert}]`, `mode: "diverging" \| "sequential"` (default: diverging when any value is negative), `invert`, `max` (caps the colour scale), `goodLabel`, `badLabel`, `corner`, `dp` | `heatmap(cols, [(label, values, invert)], unit, mode)` |
 | `scatter` | `xUnit`, `yUnit`, `points[{label, short, x, y, size, group, role}]`, `xLabel`, `yLabel`, `xName`, `yName`, `sizeName`, `sizeUnit`, `refX`, `refY` (a number or `{value, label}`), `quadrants{tl, tr, bl, br}`, `labels: "auto" \| "all" \| "none"`, `xMin/xMax/yMin/yMax`, `xZero`, `yZero` | `scatter([(label, x, y, size, group)], x_unit, y_unit, x_label, y_label, shorts={})` |
-| `cards` | `items[{k, title, value, body}]`, `cols` (max 3) | `cards([(k, title, body)])` |
+| `cards` | `items[{k, title, value, body, tone}]` (`value`: a figure with a format, `{"$fig": "rev", "fmt": "money"}`; `tone`: an accent, `s1`–`s5`, `good`, `bad`), `cols` (max 3) | `cards([(k, title, body)])` |
 | `timeline` | `phases[{label, title, body}]`, `marks[{at, text}]`, `warn`, `warnLabel`, `list[]` | `timeline([(label, title, body)])` |
 | `html` | `html` (an HTML string, no scripts), `table` for the Data button | `html(markup, table=…)`, `spark_tiles(items)` |
 
 Notes on behaviour:
+- **statement** (a chapter without `visuals`): no panel; the title, then each step's `title` as one large phrase
+  that builds up as the reader scrolls, with its `body` in small type under it. Use it for the message and for a
+  section opener (one step). It takes no `kpis` or `filter`; figures in its text are placeholders as anywhere.
 - **bars**: one series is `focal`; two default to `context`, `focal` (last year grey, this year blue); three to
   `context`, `total`, `focal`. Value labels (`labels`): `"auto"` labels every bar when there is room and one series,
   otherwise the focal series' max, min (when negative) and last; `"all"` labels every bar of every series (the
@@ -227,7 +230,8 @@ title, columns or rows) follows the switch.
 
 `storylib.validate` (run by `write()`) and the engine check the same things, for every lens option:
 - every lens map names every option, and the story defines a lens when lens maps are used
-- chapters exist, ids are unique, every chapter has visuals, every step points at a visual and KPI that exist
+- chapters exist, ids are unique, a chapter without visuals has no KPI tiles or chips, every step points at a
+  visual and KPI that exist
 - known visual types; series have one value per category; values are numbers or null; markers match categories
 - waterfalls close (0.5%); hbars values are numbers; table and appendix rows have one cell per column
 - heatmap rows have one value per column; scatter points have numeric x and y; html has no scripts

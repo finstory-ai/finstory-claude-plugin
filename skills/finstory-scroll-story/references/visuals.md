@@ -1,7 +1,8 @@
 # Choosing visuals
 
-> **finstory draws seven of these types: bars, hbars, columns, waterfall, line, table and cards.** Stacked, meter,
-> heatmap, scatter, timeline and html are refused on save; use the mapping below to pick one of the seven. The
+> **finstory draws eight of these types: bars, hbars, columns, waterfall, line, table, cards and timeline**, and a
+> chapter of words alone needs no visual (a statement, section 4). Stacked, meter, heatmap, scatter and html are
+> refused on save; use the mapping below to pick one of the eight. The
 > snippets name the old `storylib` helpers only to show the shape: write the fields as JSON, with figures as
 > references (reference-format.md).
 
@@ -40,7 +41,7 @@ its components (KPI cards, charts, tables) and their figures.
 | Waterfall / bridge | `waterfall` via `bridge()` | cost-only bridges: `invert=True`; fold beyond 7 legs |
 | Margin walk (margin from A to B, by driver) | `waterfall` with `unit="pct"`, `legUnit="pts"` | totals read 28.6%, legs +2.3 pts |
 | Column chart over months | `bars` | budget or last year as `marker`, or as a second series |
-| Line chart over months | `line` | ratios: `zeroBased=False`; forecast: `dashedFrom` |
+| Line chart over months | `line` | ratios: `zeroBased=False`; a forecast reads as `bars` with `forecastFrom` |
 | Combo (bars + line on two axes) | `bars` and `line`, two visuals | the line usually carries a % (margin, growth) |
 | Stacked columns by segment | `stacked` | `mode="share"` for mix, `"abs"` for totals; max 5 segments |
 | Pie or donut | `hbars` sorted, `unit="pct"` | or `stacked` share with one column when 2–4 parts |
@@ -53,7 +54,7 @@ its components (KPI cards, charts, tables) and their figures.
 | Matrix of variances (lines × months, stores × lines) | `heatmap` | diverging; `invert` on cost rows |
 | Scatter or bubble | `scatter` | `size` for bubbles, `group` for colours |
 | KPI grid with sparklines | `spark_tiles()` | up to 12 tiles |
-| Text block, priorities, risks | `cards` | 2–4 cards; steps highlight with `item=` |
+| Text block, priorities, risks | `cards` | 2–4 cards; steps highlight with `item=`; `tone` gives a card an accent, `value` a figure |
 | Roadmap, dated milestones | `timeline` | steps move through with `phase=` |
 | Annotations (pins on cells) | step text plus a highlight | annotations are the best source of steps |
 
@@ -65,7 +66,7 @@ its components (KPI cards, charts, tables) and their figures.
 | this year vs last year by month | `bars`, two series | `bars(cats, [("2025", ly), ("2026", act)], "k")` (roles default to grey, blue) |
 | a trend over 12–36 months | `line` | `line(cats, [("Revenue", vals)], "m")` |
 | a ratio over time (margin, DSO) | `line`, not zero-based | `line(cats, [("Margin", fr)], "pct", zeroBased=False, refs=[{"value": 0.316, "label": "Budget 31.6%"}])` |
-| actual months then forecast | `bars` with `forecastFrom` or `line` with `dashedFrom` (both per series) | `bars(cats, [{"name": "2026", "values": vals, "forecastFrom": 6, "forecastLabel": "Reforecast"}], "m")` |
+| actual months then forecast | `bars` with `forecastFrom` (per series) | `bars(cats, [{"name": "2026", "values": vals, "forecastFrom": 6, "forecastLabel": "Reforecast"}], "m")` |
 | what bridges A to B | `waterfall` | `bridge(("Budget", k1(b)), legs, ("Actual", k1(a)), "k", vsLabel="budget")` |
 | how a margin moved, driver by driver | `waterfall`, totals in %, legs in pts | `bridge(("May 2025", 0.286), [("Staff", 0.023, "Staff"), ...], ("May 2026", 0.330), "pct", legUnit="pts")` |
 | which items beat or missed | `hbars` variance, best to worst | `hbars([(name, k1(v), overunder(chg))], "k", mode="variance", sort="desc")` |
@@ -156,7 +157,9 @@ its components (KPI cards, charts, tables) and their figures.
 - Two figures (actual vs budget): `columns` with `delta`, or a KPI tile with a delta.
 - `columns` with a `delta`: order the items so the two compared sit side by side (`[last year, budget, forecast]`,
   `delta=(1, 2)`); a pill that spans a taller column covers its label.
-- A text-only page (strategy, risks, priorities): `cards`, and `timeline` when the items are dated.
+- A text-only page: the message or a section opener is a statement (a chapter without visuals, one phrase per step);
+  priorities, themes and definitions are `cards`, lit one step at a time; a dated process is a `timeline` with a
+  `marks` entry for "Today".
 - Scenarios (base / upside / downside): `columns`, or a lens when each scenario changes the whole story.
 - Different bases on different pages (consolidated vs unconsolidated, reported vs adjusted): a basis lens with
   `lens_map(rep=..., adj=...)`, or say which basis each chapter uses in its eyebrow and panel chip.
