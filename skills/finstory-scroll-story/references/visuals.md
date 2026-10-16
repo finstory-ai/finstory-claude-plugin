@@ -1,8 +1,8 @@
 # Choosing visuals
 
-> **finstory draws eight of these types: bars, hbars, columns, waterfall, line, table, cards and timeline**, and a
-> chapter of words alone needs no visual (a statement, section 4). Stacked, meter, heatmap, scatter and html are
-> refused on save; use the mapping below to pick one of the eight. The
+> **finstory draws nine of these types: bars, stacked (shares only), hbars, columns, waterfall, line, table, cards and
+> timeline**, and a chapter of words alone needs no visual (a statement, section 4). Meter, heatmap, scatter and html
+> are refused on save; use the mapping below to pick one of the nine. The
 > snippets name the old `storylib` helpers only to show the shape: write the fields as JSON, with figures as
 > references (reference-format.md).
 
@@ -41,9 +41,9 @@ its components (KPI cards, charts, tables) and their figures.
 | Waterfall / bridge | `waterfall` via `bridge()` | cost-only bridges: `invert=True`; fold beyond 7 legs |
 | Margin walk (margin from A to B, by driver) | `waterfall` with `unit="pct"`, `legUnit="pts"` | totals read 28.6%, legs +2.3 pts |
 | Column chart over months | `bars` | budget or last year as `marker`, or as a second series |
-| Line chart over months | `line` | ratios: `zeroBased=False`; a forecast reads as `bars` with `forecastFrom` |
+| Line chart over months | `line` | ratios: `zeroBased=False`; a projection: `dashedFrom`; a target range: `bands`; actual, budget and forecast lines: `dash` |
 | Combo (bars + line on two axes) | `bars` and `line`, two visuals | the line usually carries a % (margin, growth) |
-| Stacked columns by segment | `stacked` | `mode="share"` for mix, `"abs"` for totals; max 5 segments |
+| Stacked columns by segment | `stacked` | shares only (the mix); series hold the amounts; max 5 segments |
 | Pie or donut | `hbars` sorted, `unit="pct"` | or `stacked` share with one column when 2–4 parts |
 | Variance table, B/(W) by row | `hbars` with `mode="variance"` | sort `"desc"` (best to worst, so colours don't zig-zag); cost rows: B/(W), not the raw change |
 | Actual vs budget vs last year of one figure | `columns` with `delta` | three columns, bracket between two |
@@ -71,7 +71,7 @@ its components (KPI cards, charts, tables) and their figures.
 | how a margin moved, driver by driver | `waterfall`, totals in %, legs in pts | `bridge(("May 2025", 0.286), [("Staff", 0.023, "Staff"), ...], ("May 2026", 0.330), "pct", legUnit="pts")` |
 | which items beat or missed | `hbars` variance, best to worst | `hbars([(name, k1(v), overunder(chg))], "k", mode="variance", sort="desc")` |
 | the size of items, ranked | `hbars` value | `hbars(rows, "k", sort="desc", total=("Total", k1(t)))` (the total is printed, not drawn) |
-| the mix (shares of a whole) over time | `stacked` share | `stacked(cats, [(seg, vals)], mode="share")` |
+| the mix (shares of a whole) over time or across measures | `stacked` | `{"type": "stacked", "unit": "m", "categories": ["Revenue", "Margin"], "series": [{"name": "North", "values": {"$series": …}}]}` |
 | one figure against two comparisons | `columns` | `columns([("2025", ly), ("Budget", b), ("2026", a)], "m", delta=(1, 2))` (for a % the pill reads in pts) |
 | progress to a goal | `meter` | `meter(("Actual", 0.33), (0.25, 0.40), marks=[("Budget", 0.316)], goal=("Target", 0.35))` |
 | how two measures relate across items | `scatter` | `scatter([(name, growth, margin, size, group)], "pct", "pct")` |
@@ -171,7 +171,7 @@ its components (KPI cards, charts, tables) and their figures.
 |---|---|---|
 | dual-axis combo | two visuals, one per measure | one scale per chart reads honestly |
 | pie / donut | `hbars` sorted by share (or one-column `stacked`) | lengths compare better than angles |
-| stacked area | `stacked` (abs) by month, or `line` per segment | same data, readable values |
+| stacked area | `stacked` by month (shares), or `line` per segment | same data, readable values |
 | funnel | `hbars` value mode, in stage order (no sort) | each stage's drop is a bar length |
 | treemap | `hbars`, top 7 plus "Other" | sizes compare on one axis |
 | gauge with zones | `meter` with `marks` and `goal` | zones become reference marks |

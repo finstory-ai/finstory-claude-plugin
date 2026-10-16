@@ -2,9 +2,10 @@
 
 > **How this applies inside finstory.** This file lists every field finstory's story engine draws. You write the same
 > fields through the connector, but every number is a reference (reference-format.md): the numbers shown below are
-> what finstory fills in. finstory draws bars, hbars, columns, waterfall, line, table, cards and timeline, and a
-> chapter with no visuals at all (a statement, section 6); stacked, meter, heatmap, scatter and html are refused, as
-> are line `bands`, `dashedFrom` and `area`, step `zoom`/`upto`, the theme button and `meta.storyUrl`'s link. Sections 9's `storylib`/`storykit` checks are replaced by finstory's own
+> what finstory fills in. finstory draws bars, stacked (shares only), hbars, columns, waterfall, line, table, cards and
+> timeline, and a chapter with no visuals at all (a statement, section 6); meter, heatmap, scatter and html are refused,
+> as are stacked `mode`/`totals`/`valueUnit`, line `area`, `forecastLabel`, `showBands`, `bandsLegend` and band `tone`,
+> step `zoom`/`upto`/`bands`, the theme button and `meta.storyUrl`'s link. Sections 9's `storylib`/`storykit` checks are replaced by finstory's own
 > checks on save and in the app.
 
 The page is one JSON spec (`story.json`) rendered by `assets/engine.js`. Builders write it with
@@ -118,7 +119,6 @@ with other ids. A story has at most one lens.
 | `callout: {"cat": "Jul", "text": "Record $10.0M", "series": "2026"}` | bars, line | a label above one bar or point; an array for several |
 | `upto: 5` | line | draw the lines up to category index 5 (a reveal over time) |
 | `zoom: [6, 11]` | line | zoom the x-axis to category indexes 6–11 |
-| `bands: true` | line | show the line's `bands` |
 | `item: 1` | cards | highlight a card (or an array) |
 | `phase: 2` | timeline | the active phase |
 
@@ -137,10 +137,10 @@ included, so a short form must read well on its own.
 | type | fields | storylib |
 |---|---|---|
 | `bars` | `unit`, `categories[]`, `series[{name, role, values[], forecastFrom, forecastLabel}]`, `marker{name, values[]}` (budget / last-year ticks on the focal series), `labels: "auto" \| "all" \| "focal" \| "none"`, `categoryShort[]`, `yMin`, `yMax`, `dp` | `bars(cats, [(name, values, role)], unit, marker=(name, values))` |
-| `line` | `unit`, `categories[]`, `series[{name, role, values[] (null ends a line), dashedFrom, forecastLabel, area}]`, `labels: "auto" \| "all" \| "none"`, `bands[{from, to, label, fromCat, tone: "a" \| "b"}]`, `showBands`, `bandsLegend`, `refs[{value, label, tone: "good"}]`, `zeroBased` (false for ratios), `hideEndLabels`, `categoryShort[]` | `line(cats, series, unit, **kw)` |
+| `line` | `unit`, `categories[]`, `series[{name, role, values[] (null ends a line), dash: "dashed" \| "dotted", dashedFrom}]`, `labels: "auto" \| "all" \| "none"`, `bands[{from, to, fromCat, label, above, below}]`, `refs[{value, label, tone: "good"}]`, `zeroBased` (false for ratios), `hideEndLabels`, `categoryShort[]` | `line(cats, series, unit, **kw)` |
 | `hbars` | `unit`, `mode: "value" \| "variance"`, `rows[{label, short, value, compare, note, role}]`, `total{label, short, value, note}`, `sort: "desc" \| "asc" \| "abs"` (default: as given), `valueName`, `compareName`, `goodLabel`, `badLabel`, `tipNote` | `hbars([(label, value, note, compare)], unit, mode, total=(label, value), shorts={})` |
 | `waterfall` | `unit`, `legUnit` (format of the legs and the pill when it differs, e.g. totals `pct`, legs `pts`), `start{label, value, short}`, `legs[{label, value, short, tone}]`, `end{label, value, short}`, `invert` (cost bridge: up is bad), `pill`, `pillTone`, `vsLabel`, `axisFrom`, `allowGap`, `layout: "auto" \| "vertical" \| "horizontal"` | `bridge((label, v), [(label, v, short)], (label, v), unit)` |
-| `stacked` | `categories[]`, `categoryShort[]`, `series[{name, values[]}]` (max 5), `mode: "share" \| "abs"`, `totals[]` (text above columns), `unit`, `valueUnit` (share mode tooltips) | `stacked(cats, series, mode, unit)` |
+| `stacked` | `categories[]`, `categoryShort[]`, `series[{name, role, values[]}]` (max 5; the amounts, not shares), `unit` (of the totals above the columns) | `stacked(cats, series, mode, unit)` |
 | `columns` | `unit`, `items[{label, short, sub, value, role}]`, `delta{from, to, text}` (a bracket and pill between two items) | `columns([(label, value, role, sub)], unit, delta=(0, 2[, text]), shorts={})` |
 | `meter` | `unit`, `domain[lo, hi]`, `value{label, value}`, `marks[{label, value, role}]`, `goal{label, value}`, `caption` | `meter((label, v), domain, marks, goal)` |
 | `table` | `columns[]`, `rows[{label, cells[], level: "detail" \| "sub" \| "total" \| "ratio", invert}]`, `signCols[]` (green/red by sign; `invert` flips a row), `corner`, `note` | `table(cols, [pl_row(...)], sign_cols=[2, 3])` |
@@ -162,8 +162,11 @@ Notes on behaviour:
 - **line**: end labels name each series when there are two or more. Value labels (`labels`): `"auto"` labels the max
   and the last point (every point for one short series), `"all"` every point of the focal series, `"none"`; labels
   that would collide are dropped, the latest point winning, and a `callout` replaces the label at its point.
-  `dashedFrom` dashes the series from that index. `area: true` shades under one series. `zeroBased: false` lets the
-  axis start near the data (ratios, margins).
+  `dashedFrom` (a category name or index) dashes the series from that point on and lightens the focal points there:
+  a projection. `dash: "dashed"` or `"dotted"` draws a whole series so (actual, budget and forecast as three cumulative
+  lines). `bands` shade the range `from`–`to` (both figures, never typed) from `fromCat` on, with `label` inside the
+  band and `above`/`below` beside it ("<20% chance"); band texts may write out numbers from an answer a step of the
+  chapter cites. Bands always show. `zeroBased: false` lets the axis start near the data (ratios, margins).
 - **hbars**: `variance` mode colours by sign (green better, red worse) and signs the labels; `note` prints after the
   value on desktop. `compare` draws a dark tick (a budget or prior-year mark), which makes a bullet chart. In value
   mode the `total` is printed under the rows, not drawn, so a total far larger than its rows is fine.
@@ -179,7 +182,8 @@ Notes on behaviour:
   step, labels on the left); `layout` forces either form. Give long legs a `short` form anyway: once any label has to
   be cut, every leg that has a short form uses it, so sibling legs stay consistent (the same holds for hbars rows and
   columns items).
-- **stacked**: share mode normalises each column to 100% and labels segments with their share; abs mode stacks values.
+- **stacked**: each column is normalised to 100% and its segments labelled with their share; the column's total sits
+  above it and dashed connectors join each segment edge to the next column (a mix across measures or periods).
 - **columns**: roles default to `context` (first), `total` (middle), `focal` (last). The delta pill shows the
   difference and its % of the first item, or the difference in pts when `unit` is `pct`; `delta.text` replaces it. Bracket two neighbouring items: a pill that
   spans a taller column covers that column's value label (`validate` warns).

@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.11 (2026-10-16)
+
+- `finstory-scroll-story`: more chart forms. `stacked` is drawn as a mix (each column 100%, its total above, dashed connectors between segments); a line series can be `dash`ed or dotted throughout, or dashed from a category on (`dashedFrom`, a projection); a line chart can shade `bands` between two figures from a category on, labelled inside, above and below. Needs the finstory app, document service and connector with these charts (KAN-260).
+
 ## 1.0.10 (2026-10-16)
 
 - `finstory-scroll-story`: text-only chapters. A chapter with no visuals is a statement (one large phrase per step, building up as the reader scrolls) for the headline message and section openers; cards take a coloured accent (`tone`) and a figure (`value`) and light up per step (`item`); `timeline` is drawn, moving through its phases per step (`phase`) with a "Today" mark. The line `dashedFrom` and `area` fields, which finstory refuses, are no longer recommended. Needs the finstory app and document service with text chapters (KAN-258).
