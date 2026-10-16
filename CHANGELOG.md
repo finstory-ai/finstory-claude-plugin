@@ -4,7 +4,7 @@ All notable changes to the finstory plugin are recorded here. The version is the
 
 ## 1.0.11 (2026-10-16)
 
-- `finstory-scroll-story`: more chart forms. `stacked` is drawn as a mix (each column 100%, its total above, dashed connectors between segments); a line series can be `dash`ed or dotted throughout, or dashed from a category on (`dashedFrom`, a projection); a line chart can shade `bands` between two figures from a category on, labelled inside, above and below. Needs the finstory app, document service and connector with these charts (KAN-260).
+- `finstory-scroll-story`: more chart forms. `stacked` is drawn as a mix (each column 100%, its total above, dashed connectors between segments); a line series can be `dash`ed or dotted throughout, or dashed from a category on (`dashedFrom`, a projection); a line chart can shade `bands` between two figures from a category on, labelled inside, above and below; a band or reference line (a goal) may take its numbers from a recorded answer it cites (`basis`). Needs the finstory app, document service and connector with these charts (KAN-260).
 
 ## 1.0.10 (2026-10-16)
 

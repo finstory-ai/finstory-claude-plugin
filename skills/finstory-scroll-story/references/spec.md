@@ -137,7 +137,7 @@ included, so a short form must read well on its own.
 | type | fields | storylib |
 |---|---|---|
 | `bars` | `unit`, `categories[]`, `series[{name, role, values[], forecastFrom, forecastLabel}]`, `marker{name, values[]}` (budget / last-year ticks on the focal series), `labels: "auto" \| "all" \| "focal" \| "none"`, `categoryShort[]`, `yMin`, `yMax`, `dp` | `bars(cats, [(name, values, role)], unit, marker=(name, values))` |
-| `line` | `unit`, `categories[]`, `series[{name, role, values[] (null ends a line), dash: "dashed" \| "dotted", dashedFrom}]`, `labels: "auto" \| "all" \| "none"`, `bands[{from, to, fromCat, label, above, below}]`, `refs[{value, label, tone: "good"}]`, `zeroBased` (false for ratios), `hideEndLabels`, `categoryShort[]` | `line(cats, series, unit, **kw)` |
+| `line` | `unit`, `categories[]`, `series[{name, role, values[] (null ends a line), dash: "dashed" \| "dotted", dashedFrom}]`, `labels: "auto" \| "all" \| "none"`, `bands[{from, to, fromCat, label, above, below, basis}]`, `refs[{value, label, basis}]`, `zeroBased` (false for ratios), `hideEndLabels`, `categoryShort[]` | `line(cats, series, unit, **kw)` |
 | `hbars` | `unit`, `mode: "value" \| "variance"`, `rows[{label, short, value, compare, note, role}]`, `total{label, short, value, note}`, `sort: "desc" \| "asc" \| "abs"` (default: as given), `valueName`, `compareName`, `goodLabel`, `badLabel`, `tipNote` | `hbars([(label, value, note, compare)], unit, mode, total=(label, value), shorts={})` |
 | `waterfall` | `unit`, `legUnit` (format of the legs and the pill when it differs, e.g. totals `pct`, legs `pts`), `start{label, value, short}`, `legs[{label, value, short, tone}]`, `end{label, value, short}`, `invert` (cost bridge: up is bad), `pill`, `pillTone`, `vsLabel`, `axisFrom`, `allowGap`, `layout: "auto" \| "vertical" \| "horizontal"` | `bridge((label, v), [(label, v, short)], (label, v), unit)` |
 | `stacked` | `categories[]`, `categoryShort[]`, `series[{name, role, values[]}]` (max 5; the amounts, not shares), `unit` (of the totals above the columns) | `stacked(cats, series, mode, unit)` |
@@ -164,9 +164,11 @@ Notes on behaviour:
   that would collide are dropped, the latest point winning, and a `callout` replaces the label at its point.
   `dashedFrom` (a category name or index) dashes the series from that point on and lightens the focal points there:
   a projection. `dash: "dashed"` or `"dotted"` draws a whole series so (actual, budget and forecast as three cumulative
-  lines). `bands` shade the range `from`–`to` (both figures, never typed) from `fromCat` on, with `label` inside the
-  band and `above`/`below` beside it ("<20% chance"); band texts may write out numbers from an answer a step of the
-  chapter cites. Bands always show. `zeroBased: false` lets the axis start near the data (ratios, margins).
+  lines). `bands` shade the range `from`–`to` from `fromCat` on, with `label` inside the band and `above`/`below`
+  beside it ("<20% chance"). Band edges and a reference line's `value` are figures; when management gave them (a
+  goal, a likely range), record the answer and give the band or line `basis: {"answers": ["a2"]}`: its edges, value
+  and labels may then write out the numbers that answer says, in the chart's unit (a `pct` value as its fraction:
+  "40%" is 0.4). Any other typed number is refused. Bands always show. `zeroBased: false` lets the axis start near the data (ratios, margins).
 - **hbars**: `variance` mode colours by sign (green better, red worse) and signs the labels; `note` prints after the
   value on desktop. `compare` draws a dark tick (a budget or prior-year mark), which makes a bullet chart. In value
   mode the `total` is printed under the rows, not drawn, so a total far larger than its rows is fine.
