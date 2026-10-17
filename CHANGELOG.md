@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.14 (2026-10-17)
+
+- `finstory-scroll-story`: drill to a detail chapter. A bars category (`drill[]`, one per category), an hbars row or a waterfall leg may name the chapter that details it (`drill`); tapping its figure opens the source card with "Open detail: <chapter> ›", which goes there. A drill to no chapter of the story is refused at save. Needs the finstory app and connector with drill (KAN-266).
+
 ## 1.0.13 (2026-10-17)
 
 - The manifest drops the directory listing keys (`icon`, `privacyPolicyUrl`, `termsOfServiceUrl`, `supportUrl`). claude.ai showed every customer who synced the plugin since 1.0.9 a warning that these keys are unrecognized and stripped. The directory listing keeps the icon and links it read when the plugin was submitted. No skill changes.
