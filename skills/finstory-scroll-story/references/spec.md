@@ -139,10 +139,10 @@ included, so a short form must read well on its own.
 
 | type | fields | storylib |
 |---|---|---|
-| `bars` | `unit`, `categories[]`, `series[{name, role, values[], forecastFrom, forecastLabel}]`, `marker{name, values[]}` (budget / last-year ticks on the focal series), `labels: "auto" \| "all" \| "focal" \| "none"`, `categoryShort[]`, `yMin`, `yMax`, `dp` | `bars(cats, [(name, values, role)], unit, marker=(name, values))` |
+| `bars` | `unit`, `categories[]`, `series[{name, role, values[], forecastFrom, forecastLabel}]`, `marker{name, values[]}` (budget / last-year ticks on the focal series), `labels: "auto" \| "all" \| "focal" \| "none"`, `categoryShort[]`, `drill[]` (a chapter id per category, or null), `yMin`, `yMax`, `dp` | `bars(cats, [(name, values, role)], unit, marker=(name, values))` |
 | `line` | `unit`, `categories[]`, `series[{name, role, values[] (null ends a line), dash: "dashed" \| "dotted", dashedFrom}]`, `labels: "auto" \| "all" \| "none"`, `bands[{from, to, fromCat, label, above, below, basis}]`, `refs[{value, label, basis}]`, `zeroBased` (false for ratios), `hideEndLabels`, `categoryShort[]` | `line(cats, series, unit, **kw)` |
-| `hbars` | `unit`, `mode: "value" \| "variance"`, `rows[{label, short, value, compare, note, role}]`, `total{label, short, value, note}`, `sort: "desc" \| "asc" \| "abs"` (default: as given), `valueName`, `compareName`, `goodLabel`, `badLabel`, `tipNote` | `hbars([(label, value, note, compare)], unit, mode, total=(label, value), shorts={})` |
-| `waterfall` | `unit`, `legUnit` (format of the legs and the pill when it differs, e.g. totals `pct`, legs `pts`), `start{label, value, short}`, `legs[{label, value, short, tone}]`, `end{label, value, short}`, `invert` (cost bridge: up is bad), `pill`, `pillTone`, `vsLabel`, `axisFrom`, `allowGap`, `layout: "auto" \| "vertical" \| "horizontal"` | `bridge((label, v), [(label, v, short)], (label, v), unit)` |
+| `hbars` | `unit`, `mode: "value" \| "variance"`, `rows[{label, short, value, compare, note, role, drill}]`, `total{label, short, value, note}`, `sort: "desc" \| "asc" \| "abs"` (default: as given), `valueName`, `compareName`, `goodLabel`, `badLabel`, `tipNote` | `hbars([(label, value, note, compare)], unit, mode, total=(label, value), shorts={})` |
+| `waterfall` | `unit`, `legUnit` (format of the legs and the pill when it differs, e.g. totals `pct`, legs `pts`), `start{label, value, short}`, `legs[{label, value, short, tone, drill}]`, `end{label, value, short}`, `invert` (cost bridge: up is bad), `pill`, `pillTone`, `vsLabel`, `axisFrom`, `allowGap`, `layout: "auto" \| "vertical" \| "horizontal"` | `bridge((label, v), [(label, v, short)], (label, v), unit)` |
 | `stacked` | `categories[]`, `categoryShort[]`, `series[{name, role, values[]}]` (max 5; the amounts, not shares), `unit` (of the totals above the columns) | `stacked(cats, series, mode, unit)` |
 | `columns` | `unit`, `items[{label, short, sub, value, role}]`, `delta{from, to, text}` (a bracket and pill between two items) | `columns([(label, value, role, sub)], unit, delta=(0, 2[, text]), shorts={})` |
 | `meter` | `unit`, `domain[lo, hi]`, `value{label, value}`, `marks[{label, value, role}]`, `goal{label, value}`, `caption` | `meter((label, v), domain, marks, goal)` |
@@ -187,6 +187,10 @@ Notes on behaviour:
   step, labels on the left); `layout` forces either form. Give long legs a `short` form anyway: once any label has to
   be cut, every leg that has a short form uses it, so sibling legs stay consistent (the same holds for hbars rows and
   columns items).
+- **drill**: a bars category (`drill[]`, one entry per category), an hbars row or a waterfall leg may name the `id`
+  of the chapter that details it. Tapping its figure opens the source card with "Open detail: <that chapter's rail
+  label> ›", which scrolls there. The chapter must exist in the story or the save is refused; the target chapter is
+  not filtered to the tapped item, so make it about that item (a store chapter for a store bar).
 - **stacked**: each column is normalised to 100% and its segments labelled with their share; the column's total sits
   above it and dashed connectors join each segment edge to the next column (a mix across measures or periods).
 - **columns**: roles default to `context` (first), `total` (middle), `focal` (last). The delta pill shows the
