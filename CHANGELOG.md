@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.13 (2026-10-17)
+
+- The manifest drops the directory listing keys (`icon`, `privacyPolicyUrl`, `termsOfServiceUrl`, `supportUrl`). claude.ai showed every customer who synced the plugin since 1.0.9 a warning that these keys are unrecognized and stripped. The directory listing keeps the icon and links it read when the plugin was submitted. No skill changes.
+
 ## 1.0.12 (2026-10-16)
 
 - `finstory-scroll-story`: tables and tiles. A table can group columns under a header (`groups`) and give a row an accent band (`tone`); KPI tiles take a second line (`sub2`), sit in labelled rows (`row`) and may write out a goal from a recorded answer they cite (`basis`); text figures format in basis points (`bps`). Needs the finstory app and connector with these (KAN-262).
