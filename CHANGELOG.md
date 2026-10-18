@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.16 (2026-10-18)
+
+- `finstory-scroll-story`: the "Always allow" note moves to the start. The host asks permission the first time each finstory tool is used, reading tools included, so the skill tells the user in its first reply line, before any finstory call; in the 18 Oct test the note placed before the first save never reached the user (KAN-269).
+
 ## 1.0.15 (2026-10-18)
 
 - `finstory-scroll-story` works lean: SKILL.md is short enough for a host to read whole, chapter design moves to `references/design.md` and the writing rules to `references/writing.md` section 0, and each reference is read once, at the step that needs it. The skill loads its tools in one search, calls `company_get_context` once, saves three or four chapters per `story_update` (`scroll.chapters`) with the hero, appendix and notes in the last save, writes both switch positions before saving, files each answer under the chapter that cites it, reviews with the save replies (`charts`, `repeatsHero`, `stepsWithoutBasis`) instead of reading the story back, and tells the user once that "Always allow" on the Story tools avoids a prompt per save. Design adds a mix angle and when to use statement, cards and timeline chapters; writing adds shares above 100%. Needs the finstory connector with `scroll.chapters` (KAN-269).

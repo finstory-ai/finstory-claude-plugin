@@ -17,6 +17,12 @@ cite them.
 **Trust and memory come first.** For every step a CFO can tell whether it comes from the data, from the user, or from
 your own reading, and what the user tells you this month is kept with the story for next month.
 
+## Before your first finstory call
+
+Your reply's first line tells the user, before any finstory tool runs: the host may ask permission the first time
+each finstory tool is used, reading ones included, and choosing "Always allow" lets the story finish without stopping
+at each one. Say it once, in plain words, then carry on.
+
 ## Work lean
 
 Each tool result stays in the conversation for every later call, so read what you need once:
@@ -83,9 +89,6 @@ finstory reads every dataset at once and saves a first draft: charts, KPI tiles,
 steps from the movements that stand out, and empty text. The reply gives `draft.slots` (each empty text and the
 figure names it may use), `draft.left_out` (tell the user) and `evidence` per chapter. The draft is scaffolding: keep
 its sources, figures and evidence; the chapter design is yours. `basedOn` is what makes "still true?" work next period.
-
-Before the first save, tell the user once, in one line: finstory asks permission for each save, and choosing "Always
-allow" for the finstory Story tools lets the story finish without a prompt per chapter.
 
 ## 4 · Ask before you guess
 

@@ -1,7 +1,7 @@
 {
   "name": "finstory",
   "displayName": "finstory",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Work with your finstory workspace in Claude: answer questions about actuals, budget and forecast, build and edit finstory reports, and draft board stories page by page, and build interactive scroll stories. Bundles the finstory connector with four skills.",
   "author": {
     "name": "Finstory, Inc.",
