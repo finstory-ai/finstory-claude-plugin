@@ -3,8 +3,30 @@
 The page is read by a board member scrolling on a laptop or phone. They read the headline, glance at the chart, and
 read a step only when the chart makes them curious. Every line has to carry a finding.
 
-Contents: 1 Headlines · 2 Steps · 3 Numbers in text · 4 Claims you can defend · 5 Stale commentary · 6 Hero, appendix,
-notes · 7 Examples
+Contents: 0 The rules that matter most · 1 Headlines · 2 Steps · 3 Numbers in text · 4 Claims you can defend ·
+5 Stale commentary · 6 Hero, appendix, notes · 7 Examples
+
+## 0 · The rules that matter most
+
+- Headlines say the finding in two short sentences split by `|`, each under about 26 characters; the second shows in
+  green. The words come from the figures: "Revenue {{revVar|updown}} {{revPct|pct abs}} on budget." reads "up" or
+  "down" by itself.
+- Name every comparison by what it is ("vs budget", "on last May"). A column labelled "LY" may hold something else:
+  check one figure before trusting a label.
+- A headline has a verb and a cause ("Freight, not volume, cost the margin"), not a restatement of the variance.
+- A verb that claims a movement ("fell", "turned negative", "halved", "lengthening") needs a figure that clears
+  materiality: at least 5%, or the board's own threshold. A comparison needs both sides in the data; without one,
+  drop the claim.
+- A share is of a total the reader can see. When the parts move in both directions a share runs past 100% ("gave
+  203% of the beat"): say the amounts instead.
+- The same name with different values in two views (a channel and a product line with one name) gets one line
+  saying why they differ.
+- Steps: `when` 1–3 words, `title` the finding with its figure, `body` one or two sentences; about 100 words per
+  chapter in all.
+- Text may name years, period names (Q3, FY26, H1, P09), dates (30 Sep), chapter numbers, the story's own names, its
+  sources' names, and any row or column label of the chapter's own sources ("4000 Sales"). Every other number is a
+  placeholder.
+- KPI subs at most 22 characters; short forms (`short`, `categoryShort`) for labels that can be cut on a phone.
 
 ## 1 · Headlines
 

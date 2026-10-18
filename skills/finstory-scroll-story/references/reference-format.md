@@ -118,9 +118,12 @@ Axis settings (`yMin`, `yMax`, `axisFrom`) and indexes (`visual`, `kpi`, `reveal
   — every chapter needs a unique `id`. `pov` is the period the story covers (story_list and story_get show it);
   `basedOn` is the documentId of the earlier story it follows.
 - `story_update(documentId, scroll: {chapter})` replaces the chapter with that id or adds it at the end;
-  `{removeChapter: "<id>"}` drops one; `{hero}`, `{appendix}`, `{meta}`, `{lens}`, `{notes}` replace theirs. Only the
-  changed block is read again; a new `meta` re-reads every block, because the currency may have changed.
-- Both return the chapter ids, how many figures were filled, from how many sources and when, never the figures.
+  `{chapters: [...]}` does the same for several in one save; `{removeChapter: "<id>"}` drops one; `{hero}`,
+  `{appendix}`, `{meta}`, `{lens}`, `{notes}` replace theirs, and can share one save with the chapters. Only the
+  changed blocks are read again; a new `meta` re-reads every block, because the currency may have changed. A refused
+  save stores nothing and names the chapter and field.
+- Both return the chapter ids, how many figures were filled, from how many sources and when, never the figures,
+  plus `charts`, `repeatsHero` and `stepsWithoutBasis` (per chapter, the positions of steps with no basis).
 - `story_get(documentId)` returns `outline`: the blocks as you wrote them, with their references.
 - Once saved, the story stands alone: changing or deleting a report later changes nothing in it.
 

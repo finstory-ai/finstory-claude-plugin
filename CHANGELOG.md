@@ -2,6 +2,10 @@
 
 All notable changes to the finstory plugin are recorded here. The version is the one in `.claude-plugin/plugin.json`.
 
+## 1.0.15 (2026-10-18)
+
+- `finstory-scroll-story` works lean: SKILL.md is short enough for a host to read whole, chapter design moves to `references/design.md` and the writing rules to `references/writing.md` section 0, and each reference is read once, at the step that needs it. The skill loads its tools in one search, calls `company_get_context` once, saves three or four chapters per `story_update` (`scroll.chapters`) with the hero, appendix and notes in the last save, writes both switch positions before saving, files each answer under the chapter that cites it, reviews with the save replies (`charts`, `repeatsHero`, `stepsWithoutBasis`) instead of reading the story back, and tells the user once that "Always allow" on the Story tools avoids a prompt per save. Design adds a mix angle and when to use statement, cards and timeline chapters; writing adds shares above 100%. Needs the finstory connector with `scroll.chapters` (KAN-269).
+
 ## 1.0.14 (2026-10-17)
 
 - `finstory-scroll-story`: drill to a detail chapter. A bars category (`drill[]`, one per category), an hbars row or a waterfall leg may name the chapter that details it (`drill`); tapping its figure opens the source card with "Open detail: <chapter> ›", which goes there. A drill to no chapter of the story is refused at save. Needs the finstory app and connector with drill (KAN-266).
